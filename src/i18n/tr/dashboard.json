@@ -1,0 +1,14 @@
+{
+  "dashboard": {
+    "title": "Yönetim Paneli",
+    "smart": {
+      "missing_story_id": "Senaryo bilgisi eksik."
+    },
+    "filters": {
+      "sort_by": "Sırala",
+      "start_date": "Başlangıç Tarihi",
+      "stop_date": "Bitiş Tarihi",
+      "story_name": "Senaryo Adı"
+    }
+  }
+}

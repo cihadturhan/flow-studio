@@ -1,0 +1,147 @@
+{
+  "story_template": {
+    "title": "Story Template",
+    "rules": {
+      "params": {
+        "data_list": "Data List",
+        "title": "Parameter",
+        "all": "All",
+        "dynamic_data": "Dynamic Data",
+        "story_data": "Story Data",
+        "account_data": "Account Data",
+        "event_data": "Event Data",
+        "event_list": "Event List",
+        "action_data": "Actions",
+        "action_list": "Action List",
+        "enrichment_data": {
+          "title": "Enrichment",
+          "ok": "OK"
+        },
+        "campaign_list": "Campaign List",
+        "campaign_link_list": "Campaign Links",
+        "select": "Please Select",
+        "selectOrEnter": "Please Select Or Enter"
+      },
+      "name": "Rule Name",
+      "operators": {
+        "and": "AND",
+        "or": "OR"
+      },
+      "buttons": {
+        "add_group": "Add Group",
+        "save": "Save",
+        "remove_group": "Remove Group",
+        "add_inner_group": "Add Inner Group",
+        "add_condition": "Add Condition"
+      }
+    },
+    "parameters": {
+      "parameter": "Parameter"
+    },
+    "operators": {
+      "and": "AND",
+      "or": "OR"
+    },
+    "name": {
+      "title": "Flow Name",
+      "errors": {
+        "required": "Flow Name is required."
+      }
+    },
+    "reportItems": {
+      "actions": "Action List",
+      "events": "Event List",
+      "keys": "Dynamic Data",
+      "storyVariables": "Story Data"
+    },
+    "start_date": {
+      "title": "Start Date",
+      "errors": {
+        "required": "Start Date is required."
+      }
+    },
+    "stop_date": {
+      "title": "Stop Date"
+    },
+    "draft": {
+      "title": "Story Drafts",
+      "save": {
+        "success": "The draft is saved successfully",
+        "error": "Error is occurred during the draft save"
+      },
+      "warning": {
+        "delete": {
+          "title": "Delete <strong>{{name}}</strong> draft",
+          "message": "Are you sure to delete this draft?"
+        }
+      }
+    },
+    "action": {
+      "already_exist": "It is not allowed to create actions with same name.",
+      "titles": {
+        "current_actions": "Step Actions",
+        "story_actions": "Added Actions",
+        "account_actions": "All Actions",
+        "action_name": "Action Name"
+      },
+      "buttons": {
+        "add_new": "Add New",
+        "back_to_current": "Back To Step Actions",
+        "back": "Back",
+        "save": "Save",
+        "edit": "Edit",
+        "use": "Use",
+        "close": "Close",
+        "run": "Run",
+        "stop": "Stop",
+        "remove": "Remove",
+        "canvas": "Canvas",
+        "drafts": "Drafts",
+        "delete": "Delete"
+      },
+      "warning": {
+        "delete": {
+          "title": "Remove <strong>{{name}}</strong> action",
+          "message": "Are you sure you want to remove this action?"
+        },
+        "no_action": "There is not any action on this point yet."
+      },
+      "error": {
+        "getting_data": "An error occured while getting data",
+        "select_story_first": "Please select target story first",
+        "select_dataSource_first": "Please select data source first"
+      },
+      "status": "Durum",
+      "subscription_type": "Üyelik Tipi",
+      "creation_date": "Oluşturulma Tarihi",
+      "api_key": "Api Anahtarı",
+      "subscription_date": "Üyelik Tarihi",
+      "name": "İsim"
+    },
+    "editors": {
+      "time": {
+        "second": "Second",
+        "minute": "Minute",
+        "hour": "Hour",
+        "day": "Day",
+        "waiting": "Waiting Time",
+        "time_of_day": "Time of Day"
+      }
+    },
+    "operations": "Operations",
+    "validation": {
+      "rules": {
+        "not_valid": "Rules are not valid."
+      }
+    },
+    "variable": {
+      "data_type": {
+        "title": "Data Type",
+        "boolean": "Boolean (true/false)",
+        "string": "Text (a sequence of characters)",
+        "float": "Real Number (number that can contain a fractional part)",
+        "integer": "Whole number (not a fractional number)"
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "enrichment": {
+    "title": "Enrichment",
+    "name": "Name",
+    "return_type": "Return Type",
+    "type": "Type",
+    "description": "Description",
+    "definition": {
+      "data_source": "Data Source",
+      "parameter": "Parameter {{paramIndex}}",
+      "method_parameter": "Method Parameter {{paramIndex}}",
+      "query_parameter": "Query Parameter {{paramIndex}}",
+      "query": "Query",
+      "method": "Method",
+      "method_placeholder": "Example : /user/?",
+      "call_type": "Method Type",
+      "query_string": "QueryString",
+      "query_string_placeholder" : "start with /? -> Example : /?param1=?&param2=?",
+      "completeUrl" : "Complete Url"
+    },
+    "operations": {
+      "title": "Operations",
+      "detail": "Detail",
+      "delete": "Delete"
+    },
+    "warning": {
+      "delete": {
+        "title": "Delete <strong>{{name}}</strong> enrichment",
+        "message": "Are you sure you want to delete this enrichment?"
+      }
+    }
+  }
+}

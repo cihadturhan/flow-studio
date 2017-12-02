@@ -1,0 +1,14 @@
+<div class="confirm-view">
+    <div class="modal-header">
+        <h4 class="modal-title" data-translate>{{ngDialogData.title}}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="alert alert-{{ngDialogData.type}}">
+            <p data-translate>{{ngDialogData.message}}</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="closeThisDialog()" data-translate>global.buttons.cancel</button>
+        <button type="button" class="btn btn-{{ngDialogData.type}}" ng-click="confirm()" data-translate>global.buttons.continue</button>
+    </div>
+</div>

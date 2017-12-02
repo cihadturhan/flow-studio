@@ -1,0 +1,24 @@
+{
+  "layout": {
+    "nav_bar": {
+      "languages": "Dil",
+      "account": "Hesap",
+      "profile" : "Profil",
+      "logout": "Çıkış",
+      "login": "Giriş",
+      "home": "Yönetim Paneli",
+      "enrichments": "Zenginleştirme",
+      "dataSource": "Veri Kaynağı",
+      "dashboard": "Kontrol Paneli",
+      "story_templates": "Akış Şablonları",
+      "drafts": "Akış Taslakları",
+      "flows": "Akışlar",
+      "story_monitoring": "Senaryo Gözleme",
+      "notifications" : {
+        "unread" : "{{unread}} okunmamış mesajınız var.",
+        "view_all" : "Hepsini Gör"
+      },
+      "event_insertion": "Olay Ekleme"
+    }
+  }
+}

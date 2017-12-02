@@ -1,0 +1,12 @@
+{
+  "account": {
+    "title": "Hesap",
+    "status": "Durum",
+    "subscription_type": "Üyelik Tipi",
+    "creation_date": "Oluşturulma Tarihi",
+    "api_key": "Api Anahtarı",
+    "subscription_date": "Üyelik Tarihi",
+    "name": "İsim",
+    "session_expired": "Oturumunuzun süresi doldu."
+  }
+}

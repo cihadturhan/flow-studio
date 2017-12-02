@@ -1,0 +1,45 @@
+{
+  "global": {
+    "home": "Home",
+    "title": "SmartMessage Autoflow",
+    "buttons": {
+      "deploy": "Deploy",
+      "add": "Add",
+      "save": "Save",
+      "draft": "Draft",
+      "start": "Start",
+      "cancel": "Cancel",
+      "continue": "Continue",
+      "delete" : "Delete",
+      "update": "Update",
+      "clone": "Clone",
+      "save_as_draft": "Save As Draft",
+      "mark_all_read": "Mark All As Read",
+      "send": "Send",
+      "next": "Next",
+      "back": "Back"
+    },
+    "errors": {
+      "unknown": "Unknown error occured"
+    },
+    "time": {
+      "waiting": {
+        "later": "later",
+        "Second": "second",
+        "Minute": "minute",
+        "Hour": "hour",
+        "Day": "day"
+      },
+      "time_of_day": {
+        "at": ""
+      }
+    },
+    "error": {
+      "not_found": "The source your are looking for can not be found.",
+      "no_data": "No Data"
+    },
+    "action": {
+      "search_text": "Search Text"
+    }
+  }
+}

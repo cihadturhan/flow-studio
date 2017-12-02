@@ -1,0 +1,9 @@
+{
+  "notification": {
+    "title": "Notifications",
+    "category" : "Category",
+    "severity" : "Severity",
+    "message" : "Message",
+    "date": "Date"
+  }
+}

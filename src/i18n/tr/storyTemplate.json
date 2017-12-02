@@ -1,0 +1,147 @@
+{
+  "story_template": {
+    "title": "Akış Şablonları",
+    "rules": {
+      "params": {
+        "data_list": "Veri Listesi",
+        "title": "Parametre",
+        "all": "Tümü",
+        "dynamic_data": "Dinamik Veri",
+        "story_data": "Akış Verisi",
+        "account_data": "Hesap Verisi",
+        "event_data": "Olay Verisi",
+        "event_list": "Olay Listesi",
+        "action_data": "Aksiyonlar",
+        "action_list": "Aksiyon Listesi",
+        "enrichment_data": {
+          "title": "Zenginleştirme",
+          "ok": "Tamam"
+        },
+        "campaign_list": "Kampanya Listesi",
+        "campaign_link_list": "Kampanya Linkleri",
+        "select": "Lütfen Seçin",
+        "selectOrEnter": "Lütfen Seçin veya Girin"
+      },
+      "name": "Kural Adı",
+      "operators": {
+        "and": "VE",
+        "or": "VEYA"
+      },
+      "buttons": {
+        "add_group" : "Grup Ekle",
+        "save" : "Kaydet",
+        "remove_group" : "Grubu Sil",
+        "add_inner_group" : "Alt Grup Ekle",
+        "add_condition" : "Kural Ekle"
+      }
+    },
+    "reportItems": {
+      "actions": "Aksiyon Listesi",
+      "events": "Olay Listesi",
+      "keys": "Dinamik Veriler",
+      "storyVariables": "Akış Verileri"
+    },
+    "parameters": {
+      "parameter": "Parametre"
+    },
+    "operators": {
+      "and": "VE",
+      "or": "VEYA"
+    },
+    "name": {
+      "title": "Akış Adı",
+      "errors": {
+        "required": "Akış Adı zorunludur."
+      }
+    },
+    "start_date": {
+      "title": "Başlangıç Tarihi",
+      "errors": {
+        "required": "Başlangıç tarihi zorunludur."
+      }
+    },
+    "stop_date": {
+      "title": "Bitiş Tarihi"
+    },
+    "draft": {
+      "title": "Akış Taslakları",
+      "save": {
+        "success": "Taslak başarılı bir şekilde kaydedildi",
+        "error": "Taslak kaydedilirken hata oluştu"
+      },
+      "warning": {
+        "delete": {
+          "title" : "<strong>{{name}}</strong> Taslak Tanımını Sil",
+          "message" : "Bu taslak tanımını silmek istediğinizden emin misiniz?"
+        }
+      }
+    },
+    "action": {
+      "already_exist": "Aynı isimli birden fazla aksiyon oluşturulamaz.",
+      "titles": {
+        "current_actions": "Adım Aksiyonları",
+        "story_actions": "Eklenmiş Aksiyonlar",
+        "account_actions": "Tüm Aksiyonlar",
+        "action_name": "Aksiyon Adı"
+      },
+      "buttons": {
+        "add_new": "Yeni Ekle",
+        "back_to_current": "Adım Aksiyonlarına Dön",
+        "back": "Geri",
+        "save": "Kaydet",
+        "edit": "Düzenle",
+        "use": "Kullan",
+        "close": "Kapat",
+        "run": "Çalıştır",
+        "stop": "Durdur",
+        "remove": "Kaldır",
+        "canvas": "Canvas",
+        "drafts" : "Taslaklar",
+        "delete": "Sil"
+      },
+      "warning": {
+        "delete": {
+          "title": "<strong>{{name}}</strong> Aksiyonunu sil",
+          "message": "Aksiyon silinecek, devam etmek istiyor musunuz?"
+        },
+        "no_action": "Bu aşamada henüz hiç aksiyon yok."
+      },
+      "error": {
+        "getting_data": "Veri çekilirken hata oluştu.",
+        "select_story_first": "Lütfen önce hedef akışı seçin",
+        "select_dataSource_first": "Lütfen önce veri kaynağını seçin"
+      },
+      "status": "Durum",
+      "subscription_type": "Üyelik Tipi",
+      "creation_date": "Oluşturulma Tarihi",
+      "api_key": "Api Anahtarı",
+      "subscription_date": "Üyelik Tarihi",
+      "name": "İsim"
+    },
+    "editors": {
+      "time": {
+        "second": "Saniye",
+        "minute": "Dakika",
+        "hour": "Saat",
+        "day": "Gün",
+        "waiting": "Bekleme Süresi",
+        "time_of_day": "Tarih"
+      }
+    },
+    "operations": "Operations",
+    "validation": {
+      "rules": {
+        "not_valid": "Kural tanımları geçerli değil."
+      }
+    },
+    "variable": {
+      "data_type": {
+        "title": "Veri Tipi",
+        "boolean": "Boolean (true/false)",
+        "string": "Metin",
+        "float": "Gerçek sayı (noktalı kısım içerir)",
+        "integer": "Tam sayı (noktalı kısım içermez)"
+      }
+    }
+  }
+}

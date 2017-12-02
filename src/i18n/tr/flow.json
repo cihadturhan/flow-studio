@@ -1,0 +1,75 @@
+{
+  "flow":{
+    "title":"Akış",
+    "create":{
+      "title":"Akış Yarat",
+      "draft":"Akış Taslağı Oluştur"
+    },
+    "button": {
+      "add": "Yeni Akış Ekle"
+    },
+    "name": {
+      "title": "Akış Adı"
+    },
+    "story": {
+      "title": "Akış",
+      "new": "Yeni Akış",
+      "data": {
+        "name": {
+          "title": "İsim"
+        },
+        "type": {
+          "title": "Başlık"
+        },
+        "value": {
+          "title": "Değer"
+        }
+      }
+    },
+    "icon": {
+      "step": {
+        "title": "Adım",
+        "name": "Adım İsmi",
+        "save": "Kaydet"
+      },
+      "event": {
+        "title": "Olaylar",
+        "name": "Olay İsmi",
+        "save": "Kaydet",
+        "add": "Olay Ekle",
+        "wait": "Bekle",
+        "warning": {
+          "using_in_rule_or_action": "Bu olay aksiyon veya kural tarafından kullanılıyor, değiştiremezsiniz.."
+        }
+      },
+      "action": {
+        "name": "Aksiyon İsmi",
+        "save": "Kaydet"
+      },
+      "rule": {
+        "name": "Kural İsmi",
+        "save": "Kaydet"
+      }
+    },
+    "errors": {
+      "connection_empty_steps": "Boş Adımları kullanarak bağlantı oluşturamazsınız, kaynak ve hedef adımlarını doldurunuz",
+      "step_is_not_editable": "Adım ismi düzenlenebilir değil",
+      "delete": {
+        "variable_is_in_use_in_definition": "Silmek istediğiniz veri kullanımdadır : [{{ruleNames}}] - [{{actionNames}}]"
+      },
+      "edit": {
+        "variable_is_in_use_in_definition": "Güncellemek istediğiniz veri kullanımdadır : [{{ruleNames}}] - [{{actionNames}}]"
+      },
+      "form_is_not_valid": "Lütfen zorunlu alanları doldurunuz.",
+      "variable_already_added": "Parametre zaten mevcut."
+    },
+    "success": {
+      "deployed": "Akış başarılı bir şekilde devreye alındı",
+      "updated": "Akış başarılı bir şekilde güncellendi"
+    },
+    "delete": {
+      "title" : "<strong>{{name}}</strong> Parametre Tanımını Sil",
+      "message" : "Bu parametre tanımını silmek istediğinizden emin misiniz?"
+    }
+  }
+}

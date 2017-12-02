@@ -1,0 +1,24 @@
+{
+  "layout": {
+    "nav_bar": {
+      "languages": "لغة",
+      "account": "الحساب",
+      "profile" : "الشخصي",
+      "logout": "الخروج",
+      "login": "تسجيل الدخول",
+      "home": "لوحة القيادة",
+      "enrichments": "التخصيب",
+      "dataSource": "مصدر البيانات",
+      "dashboard": "لوحة القيادة",
+      "story_templates": "تدفق",
+      "drafts": "مشروع",
+      "flows": "رسومات",
+      "story_monitoring": "تدفق",
+      "notifications" : {
+        "unread" : "You have {{unread}} unread notifications",
+        "view_all" : "View All"
+      },
+      "event_insertion": "Event Insertion"
+    }
+  }
+}

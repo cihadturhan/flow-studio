@@ -1,0 +1,35 @@
+<!--START LEFT SIDE MENU-->
+<aside class="main-sidebar" ng-if="vm.isAuthenticated" ng-cloak>
+    <section class="sidebar" style="height: auto;">
+        <div class="user-panel">
+            <a class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+            </a>
+            <div class="pull-left image">
+                <img src="../../../content/images/no-image.jpg" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p>{{vm.account.username}}</p>
+                <a href="#"><i class="fa fa-circle text-success"></i> Admin</a>
+            </div>
+        </div>
+        <ul class="sidebar-menu">
+            <li ng-cloak ng-repeat="menu in vm.menus | orderBy: 'groupOrder'" ng-class="{activated: $state.current.name == menu.state || $state.current.data.menu.parent == menu.state}">
+                <a role="button" ng-click="vm.state(menu.state, true)">
+                    <i class="fa fa-{{menu.icon}}"></i>
+                    <span data-translate>{{menu.text}}</span>
+                </a>
+            </li>
+
+        </ul>
+    </section>
+</aside>
+<!--END LEFT SIDE MENU-->
+<div class="header-page" ng-if="vm.isAuthenticated" style="background-color: #ffffff">
+    <h3 class="title col-md-6" translate>{{$state.current.data.pageTitle}}</h3>
+    <ul class="breadcrumb pull-right">
+        <li class="active" ng-repeat="title in $state.current.data.parentTitles" data-translate>{{title}}</li>
+        <li class="active" data-translate>{{$state.current.data.pageTitle}}</li>
+        <li class="active" ng-repeat="subTitle in $state.current.data.subTitles" data-translate>{{subTitle}}</li>
+    </ul>
+</div>

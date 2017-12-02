@@ -1,0 +1,12 @@
+{
+  "login": {
+    "title": "SM Autoflow Login",
+    "username": {
+      "placeholder": "Username"
+    },
+    "password": {
+      "placeholder": "Password"
+    },
+    "button": "Login"
+  }
+}

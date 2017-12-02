@@ -1,0 +1,33 @@
+{
+  "enrichment": {
+    "title": "Zenginleştirme",
+    "name": "İsim",
+    "return_type": "Dönüş Tipi",
+    "type": "Kaynak Tipi",
+    "description": "Açıklama",
+    "definition": {
+      "data_source": "Veri Kaynağı",
+      "parameter": "Parametre {{paramIndex}}",
+      "method_parameter": "Metot Parametresi{{paramIndex}}",
+      "query_parameter": "Sorgu Parametresi {{paramIndex}}",
+      "query": "Sorgu",
+      "method": "Metot",
+      "method_placeholder": "Örnek : /user/?",
+      "call_type": "Metot Tipi",
+      "query_string": "Sorgu İfadesi",
+      "query_string_placeholder" : "/? ile başlar -> Örnek : /?param1=?&param2=?",
+      "completeUrl" : "Tamamlanmış Url"
+    },
+    "operations": {
+      "title": "İşlemler",
+      "detail": "Detay",
+      "delete": "Sil"
+    },
+    "warning" : {
+      "delete" : {
+        "title" : "<strong>{{name}}</strong> Zenginleştirme Tanımını Sil",
+        "message" : "Bu zenginleştirme tanımını silmek istediğinizden emin misiniz?"
+      }
+    }
+  }
+}

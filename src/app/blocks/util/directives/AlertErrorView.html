@@ -1,0 +1,7 @@
+<div class="alerts" ng-cloak="" role="alert">
+    <div ng-repeat="alert in $ctrl.alerts" ng-class="[alert.position, {'toast': alert.toast}]">
+        <div ng-cloak="" type="{{alert.type}}" close="alert.close($ctrl.alerts)" class="alert alert-{{alert.type}}" role="alert">
+            {{ alert.msg }}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+{
+  "account": {
+    "title": "Account",
+    "status": "Status",
+    "subscription_type": "Subscription Type",
+    "creation_date": "Creation Date",
+    "api_key": "Api Key",
+    "subscription_date": "Subscription Date",
+    "name": "Name",
+    "session_expired": "Your session is expired"
+  }
+}

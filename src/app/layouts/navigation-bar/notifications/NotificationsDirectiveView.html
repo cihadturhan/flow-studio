@@ -1,0 +1,24 @@
+<li class="dropdown notifications-menu">
+    <a role="button" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+        <i class="fa fa-bell-o"></i>
+        <span class="label label-warning">{{vm.unreadCount}}</span>
+    </a>
+    <ul class="dropdown-menu" style="margin-top:2px;">
+        <li class="header"><span data-translate translate-values="{unread: vm.unreadCount}">layout.nav_bar.notifications.unread</span></li>
+        <li>
+            <!-- inner menu: contains the actual data -->
+            <ul class="menu">
+                <li ng-repeat="notification in vm.notifications">
+                    <a href="#">
+                        <i class="fa fa-users text-aqua"></i> {{notification.message}}
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="footer">
+            <button class="btn btn-default btn-block btn-flat" ng-click="vm.goToNotifications()">
+                <span data-translate>layout.nav_bar.notifications.view_all</span>
+            </button>
+        </li>
+    </ul>
+</li>

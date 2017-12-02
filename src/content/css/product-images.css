@@ -1,0 +1,19 @@
+.image-medium {
+  margin: 0 0 20px 0;
+  height: 180px; }
+
+.image-medium img {
+  display: block;
+  height: 100%;
+  width: auto; }
+
+.image-medium .drop-box {
+  background: #F8F8F8;
+  border: 5px dashed #DDD;
+  height: 100%;
+  text-align: center;
+  padding: 80px 10px;
+  margin-left: 10px; }
+
+.md-button.md-small {
+  min-width: 2%; }

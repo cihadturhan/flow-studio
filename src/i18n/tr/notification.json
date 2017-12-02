@@ -1,0 +1,9 @@
+{
+  "notification": {
+    "title": "Bildirimler",
+    "category" : "Kategori",
+    "severity" : "Seviye",
+    "message" : "Mesaj",
+    "date": "Tarih"
+  }
+}

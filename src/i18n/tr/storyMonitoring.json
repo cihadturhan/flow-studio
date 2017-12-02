@@ -1,0 +1,41 @@
+{
+  "story_monitoring": {
+    "title": "Senaryo İzleme",
+    "stepDistribution": "Adım Dağılımı",
+    "titles": {
+      "startDate": "Başlangıç : {{param | date:'dd-MM-yyyy HH:mm:ss'}}",
+      "stopDate": "Bitiş : {{param | date:'dd-MM-yyyy HH:mm:ss'}}",
+      "remainingTime": "Kalan Süre : {{param}}",
+      "totalCustomers": "Toplam Müşteri Sayısı",
+      "totalActions": "Gerçekleştirilen toplam işlem sayısı",
+      "totalEvents": "Toplam işlenen olay sayısı",
+      "remainingTime": "Kalan çalışma süresi",
+      "reportVars": "Rapor Değişkenleri",
+      "actionStats": "İşlem İstatistikleri ",
+      "eventStats": "Olay İstatistikleri",
+      "stepDists": {
+        "min": "Adım Dağılımı(Son 5 dk)",
+        "hour": "Adım Dağılımı(Son 5 saat)",
+        "day": "Adım Dağılımı(Son 5 gün)",
+        "week": "Adım Dağılımı(Son 5 hafta)"
+      },
+      "stepChanges": {
+        "sec": "sn",
+        "min": "dk",
+        "hour": "sa",
+        "day": "g"
+      },
+      "details": "Detaylar",
+      "stepDist": "Adım Değişimi",
+      "noData": "Veri Bulunmamaktadır",
+      "noDataYet": "Henüz Veri Bulunmamaktadır",
+      "minute": "Dakika",
+      "hour": "Saat",
+      "day": "Gün",
+      "week": "Hafta"
+    },
+    "day": "Gün",
+    "hour": "Saat",
+    "minute": "Dakika"
+  }
+}

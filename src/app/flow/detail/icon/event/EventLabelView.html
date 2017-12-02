@@ -1,0 +1,24 @@
+<alert></alert>
+<alert-error></alert-error>
+<div class="modal-header">
+    <h4 class="modal-title"><span data-translate>flow.icon.event.title</span></h4>
+</div>
+<form name="canvas_event">
+    <div class="form-group lg-6">
+        <label data-translate>flow.icon.event.name</label>
+        <div ng-class="{'has-error' : canvas_event.eventName.$invalid && vm.submitted}">
+            <select required="true"
+                    class="form-control"
+                    name="eventName"
+                    ng-model="vm.model.userData"
+                    ng-options="(event.eventName |eventName).name for event in vm.eventList track by event.eventName ">
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-default" ng-click="closeThisDialog()" data-translate>global.buttons.cancel</button>
+        <button type="submit" class="btn btn-success pull-right" ng-required="true" ng-click="vm.save(); vm.submitted=true">
+            <span data-translate>flow.icon.event.save</span>
+        </button>
+    </div>
+</form>

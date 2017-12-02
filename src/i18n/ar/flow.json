@@ -1,0 +1,75 @@
+{
+  "flow":{
+    "title":"Story",
+    "create":{
+      "title":"Create Flow",
+      "draft":"Create Flow Draft"
+    },
+    "button": {
+      "add": "Add New Flow"
+    },
+    "name": {
+      "title": "Flow Name"
+    },
+    "story": {
+      "title": "Story",
+      "new": "New Story",
+      "data": {
+        "name": {
+          "title": "Name"
+        },
+        "type": {
+          "title": "Title"
+        },
+        "value": {
+          "title": "Value"
+        }
+      }
+    },
+    "icon": {
+      "step": {
+        "title": "Step",
+        "name": "Step Name",
+        "save": "Save"
+      },
+      "event": {
+        "title": "Events",
+        "name": "Event Name",
+        "save": "Save",
+        "add": "Add Event",
+        "wait": "Wait",
+        "warning": {
+          "using_in_rule_or_action": "Action or rule have been using this event, you can not change.."
+        }
+      },
+      "action": {
+        "name": "Action Name",
+        "save": "Save"
+      },
+      "rule": {
+        "name": "Kural İsmi",
+        "save": "Kaydet"
+      }
+    },
+    "errors": {
+      "connection_empty_steps": "You can not create the connection using empty steps, please fill source and target steps",
+      "step_is_not_editable": "Step name is not editable",
+      "delete": {
+        "variable_is_in_use_in_definition": "Data you want to delete is in use : [{{ruleNames}}] - [{{actionNames}}]"
+      },
+      "edit": {
+        "variable_is_in_use_in_definition": "Data you want to edit is in use : [{{ruleNames}}] - [{{actionNames}}]"
+      },
+      "form_is_not_valid": "Please fill in the required fields.",
+      "variable_already_added": "Variable already exists."
+    },
+    "success": {
+      "deployed": "Flow is deployed successfully",
+      "updated": "Flow is updated successfully"
+    },
+    "delete": {
+      "message": "Are you sure to delete this variable?",
+      "title": "Delete <strong>{{name}}</strong> variable"
+    }
+  }
+}

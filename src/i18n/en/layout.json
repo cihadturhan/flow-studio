@@ -1,0 +1,24 @@
+{
+  "layout": {
+    "nav_bar": {
+      "languages": "Language",
+      "account": "Account",
+      "profile" : "Profile",
+      "logout": "Logout",
+      "login": "Login",
+      "home": "Dashboard",
+      "enrichments": "Enrichments",
+      "dataSource": "Data Source",
+      "dashboard": "Dashboard",
+      "story_templates": "Story Templates",
+      "drafts": "Story Drafts",
+      "flows": "Flows",
+      "story_monitoring": "Story Monitoring",
+      "notifications" : {
+        "unread" : "You have {{unread}} unread notifications",
+        "view_all" : "View All"
+      },
+      "event_insertion": "Event Insertion"
+    }
+  }
+}

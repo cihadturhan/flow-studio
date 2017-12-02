@@ -1,0 +1,210 @@
+<!doctype html>
+<html class="no-js" ng-app="gatewayApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SmartMessage Autoflow</title>
+    <meta name="description" content="">
+    <meta name="google" value="notranslate">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/png" href="../../../content/images/fav_autoflow.gif">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css content/css/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/normalize-css/normalize.css">
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css">
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css">
+    <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="bower_components/angular-tooltips/dist/angular-tooltips.min.css">
+    <link rel="stylesheet" href="bower_components/AdminLTE/dist/css/AdminLTE.css">
+    <!-- endinject -->
+    <!-- endbuild -->
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
+    <!-- build:css content/css/main.css -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="content/css/main.css">
+    <!-- endinject -->
+    <!-- endbuild -->
+</head>
+
+<body ng-controller="AppController as vm" ng-class="[$state.current.data.currentBodyClass, {'flowScroll' : $state.current.name == 'flow.detail'}]" class="skin-blue sidebar-mini">
+
+<div class="wrapper" style="height: auto;" ng-class="{'engagePopup':!isMenuPermit}">
+    <div ui-view="menu"  ng-cloak ng-if="isMenuPermit"></div>
+    <div ui-view="content" ng-cloak>
+    </div>
+</div>
+
+<!-- build:js app/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/shifty/dist/shifty.min.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-translate/angular-translate.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
+<script src="bower_components/moment/moment.js"></script>
+<script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+<script src="bower_components/ngstorage/ngStorage.js"></script>
+<script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
+<script src="bower_components/messageformat/messageformat.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-messages/angular-messages.js"></script>
+<script src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
+<script src="bower_components/angular-base64/angular-base64.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/ng-dialog/js/ngDialog.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-bind-html-compile/angular-bind-html-compile.js"></script>
+<script src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<script src="bower_components/angular-tooltips/dist/angular-tooltips.min.js"></script>
+<script src="bower_components/chart.js/dist/Chart.js"></script>
+<script src="bower_components/jquery-ui/jquery-ui.js"></script>
+<script src="bower_components/AdminLTE/dist/js/app.js"></script>
+<script src="bower_components/humanize-duration/humanize-duration.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/draw2d/dist/jquery.autoresize.js"></script>
+<script src="bower_components/draw2d/dist/jquery-touch_punch.js"></script>
+<script src="bower_components/draw2d/dist/jquery.contextmenu.js"></script>
+<script src="bower_components/draw2d/dist/patched_raphael.js"></script>
+<script src="bower_components/draw2d/dist/rgbcolor.js"></script>
+<script src="bower_components/draw2d/dist/patched_canvg.js"></script>
+<script src="bower_components/draw2d/dist/patched_Class.js"></script>
+<script src="bower_components/draw2d/dist/json2.js"></script>
+<script src="bower_components/draw2d/dist/pathfinding-browser.min.js"></script>
+<script src="bower_components/draw2d/dist/StackBlur.js"></script>
+<script src="bower_components/draw2d/dist/shifty.js"></script>
+<script src="bower_components/draw2d/dist/draw2d_core.js"></script>
+<script src="bower_components/draw2d/dist/draw2d.js"></script>
+<script src="bower_components/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js"></script>
+<script src="bower_components/angular-eonasdan-datetimepicker/dist/angular-eonasdan-datetimepicker.js"></script>
+<script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+<script src="bower_components/angular-timer/dist/angular-timer.js"></script>
+<!-- endinject -->
+<!-- endbuild -->
+
+<!-- build:js app/app.js  -->
+<!-- inject:js -->
+<script src="app/AppModule.js"></script>
+<script src="app/account/AccountModule.js"></script>
+<script src="app/account/detail/AccountDetailModule.js"></script>
+<script src="app/account/login/LoginModule.js"></script>
+<script src="app/account/timeout/TimeoutModule.js"></script>
+<script src="app/blocks/BlocksModule.js"></script>
+<script src="app/dashboard/DashboardModule.js"></script>
+<script src="app/flow/FlowModule.js"></script>
+<script src="app/home/HomeModule.js"></script>
+<script src="app/layouts/LayoutModule.js"></script>
+<script src="app/AppConstants.js"></script>
+<script src="app/blocks/BlocksConstants.js"></script>
+<script src="app/blocks/config/TranslationModelTypeConstants.js"></script>
+<script src="app/blocks/language/LanguageConstants.js"></script>
+<script src="app/layouts/LayoutConstants.js"></script>
+<script src="app/blocks/config/RouterHelperProvider.js"></script>
+<script src="app/AppConfig.js"></script>
+<script src="app/blocks/config/HttpConfig.js"></script>
+<script src="app/blocks/config/TranslationConfig.js"></script>
+<script src="app/AppRoute.js"></script>
+<script src="app/account/AccountRoute.js"></script>
+<script src="app/account/detail/AccountDetailRoute.js"></script>
+<script src="app/account/login/LoginRoute.js"></script>
+<script src="app/account/timeout/TimeoutRoute.js"></script>
+<script src="app/dashboard/DashboardRoute.js"></script>
+<script src="app/dashboard/detail/DashboardDetailRoute.js"></script>
+<script src="app/flow/detail/FlowDetailRoute.js"></script>
+<script src="app/flow/FlowRoute.js"></script>
+<script src="app/GatewayRoute.js"></script>
+<script src="app/home/HomeRoute.js"></script>
+<script src="app/blocks/util/directives/AlertService.js"></script>
+<script src="app/blocks/util/services/DateUtilsService.js"></script>
+<script src="app/blocks/util/services/DialogService.js"></script>
+<script src="app/blocks/util/services/ExpressionUtilsService.js"></script>
+<script src="app/blocks/util/services/IntegrationDispatcherService.js"></script>
+<script src="app/blocks/util/services/RequestUtilsService.js"></script>
+<script src="app/blocks/util/services/StorageHelperService.js"></script>
+<script src="app/flow/detail/services/FlowHelperService.js"></script>
+<script src="app/account/AccountFactory.js"></script>
+<script src="app/account/AuthFactory.js"></script>
+<script src="app/blocks/config/TranslationFactory.js"></script>
+<script src="app/blocks/config/TranslationStorageFactory.js"></script>
+<script src="app/blocks/language/LanguageFactory.js"></script>
+<script src="app/dashboard/DashboardFactory.js"></script>
+<script src="app/dashboard/UtilFactory.js"></script>
+<script src="app/blocks/language/LanguageFilter.js"></script>
+<script src="app/blocks/util/filters/ActionEditorNamesFilter.js"></script>
+<script src="app/blocks/util/filters/ActionNameFilter.js"></script>
+<script src="app/blocks/util/filters/ActionParameterNameFilter.js"></script>
+<script src="app/blocks/util/filters/DataTypeNameFilter.js"></script>
+<script src="app/blocks/util/filters/EnrichmentNameFilter.js"></script>
+<script src="app/blocks/util/filters/EnrichmentParameterNameFilter.js"></script>
+<script src="app/blocks/util/filters/EventNameFilter.js"></script>
+<script src="app/blocks/util/filters/EventParameterNameFilter.js"></script>
+<script src="app/blocks/util/filters/StoryTemplateRepresentationFilter.js"></script>
+<script src="app/blocks/util/filters/StringFilter.js"></script>
+<script src="app/blocks/util/filters/TimeEditorParameterFilter.js"></script>
+<script src="app/blocks/util/directives/AlertDirective.js"></script>
+<script src="app/blocks/util/directives/AlertErrorDirective.js"></script>
+<script src="app/blocks/util/directives/RuleGroupDirective.js"></script>
+<script src="app/blocks/util/directives/RuleItemDirective.js"></script>
+<script src="app/blocks/util/directives/StoryDropDownDirective.js"></script>
+<script src="app/blocks/util/directives/ToolTipDirective.js"></script>
+<script src="app/flow/detail/directives/AutoFlowCanvasDirective.js"></script>
+<script src="app/flow/detail/directives/AutoFlowPaletteDirective.js"></script>
+<script src="app/blocks/interceptor/RequestErrorInterceptor.js"></script>
+<script src="app/blocks/interceptor/RequestInterceptor.js"></script>
+<script src="app/blocks/interceptor/ResponseErrorInterceptor.js"></script>
+<script src="app/blocks/interceptor/ResponseInterceptor.js"></script>
+<script src="app/blocks/handlers/StateHandler.js"></script>
+<script src="app/blocks/handlers/TranslationHandler.js"></script>
+<script src="app/account/detail/AccountDetailController.js"></script>
+<script src="app/account/login/LoginController.js"></script>
+<script src="app/account/timeout/TimeoutController.js"></script>
+<script src="app/AppController.js"></script>
+<script src="app/blocks/language/LanguageController.js"></script>
+<script src="app/dashboard/DashboardController.js"></script>
+<script src="app/flow/detail/FlowDetailController.js"></script>
+<script src="app/flow/detail/FlowInfoController.js"></script>
+<script src="app/flow/detail/icon/action/ActionMiniIconController.js"></script>
+<script src="app/flow/detail/icon/event/EventLabelController.js"></script>
+<script src="app/flow/detail/icon/rule/RuleIconController.js"></script>
+<script src="app/flow/detail/icon/step/StepIconController.js"></script>
+<script src="app/flow/detail/StoryDataController.js"></script>
+<script src="app/flow/FlowController.js"></script>
+<script src="app/GatewayController.js"></script>
+<script src="app/home/HomeController.js"></script>
+<script src="app/layouts/navigation-bar/NavigationBarController.js"></script>
+<script src="app/layouts/navigation-bar/notifications/NotificationsDirectiveController.js"></script>
+<script src="app/flow/detail/icon/action/ActionMiniIcon.js"></script>
+<script src="app/flow/detail/icon/CanvasKeyboardPolicy.js"></script>
+<script src="app/flow/detail/icon/DropInterceptorPolicy.js"></script>
+<script src="app/flow/detail/icon/event/EventIcon.js"></script>
+<script src="app/flow/detail/icon/event/EventLabel.js"></script>
+<script src="app/flow/detail/icon/event/EventLocator.js"></script>
+<script src="app/flow/detail/icon/EventConnection.js"></script>
+<script src="app/flow/detail/icon/rule/RuleIcon.js"></script>
+<script src="app/flow/detail/icon/rule/RuleLabel.js"></script>
+<script src="app/flow/detail/icon/rule/RuleLocator.js"></script>
+<script src="app/flow/detail/icon/rule/RuleMiniIcon.js"></script>
+<script src="app/flow/detail/icon/RuleConnection.js"></script>
+<script src="app/flow/detail/icon/step/StartStepIcon.js"></script>
+<script src="app/flow/detail/icon/step/StepIcon.js"></script>
+<script src="app/flow/detail/icon/step/StepLabel.js"></script>
+<script src="app/flow/detail/icon/time/TimeHorizontalLayout.js"></script>
+<script src="app/flow/detail/icon/time/TimeLabel.js"></script>
+<script src="app/flow/detail/icon/time/TimeLabelLocator.js"></script>
+<script src="app/flow/detail/icon/time/TimeLocator.js"></script>
+<script src="app/flow/detail/icon/time/TimeMiniIcon.js"></script>
+<script src="app/flow/detail/services/AutoFlowCanvasDraw.js"></script>
+<script src="app/flow/detail/services/AutoFlowCanvasStory.js"></script>
+<script src="app/flow/FlowConstant.js"></script>
+<!-- endinject -->
+<!-- endbuild -->
+
+</body>
+</html>

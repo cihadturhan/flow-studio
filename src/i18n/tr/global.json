@@ -1,0 +1,45 @@
+{
+  "global": {
+    "home": "Anasayfa",
+    "title": "SmartMessage Autoflow",
+    "buttons": {
+      "deploy": "Devreye Al",
+      "add": "Ekle",
+      "save": "Kaydet",
+      "draft": "Taslak",
+      "start": "Başlat",
+      "cancel": "İptal",
+      "continue": "Devam",
+      "update": "Güncelle",
+      "delete" : "Sil",
+      "clone": "Çoğalt",
+      "save_as_draft": "Taslak Olarak Kaydet",
+      "mark_all_read": "Hepsini Okundu Olarak İşaretle",
+      "send": "Gönder",
+      "next": "İleri",
+      "back": "Geri"
+    },
+    "errors": {
+      "unknown": "Bilinmeyen bir hata oluştu"
+    },
+    "time":{
+      "waiting": {
+        "later": "sonra",
+        "Second": "saniye",
+        "Minute": "dakika",
+        "Hour": "saat",
+        "Day": "gün"
+      },
+      "time_of_day": {
+        "at": "tarihinde"
+      }
+    },
+    "error": {
+      "not_found": "Aradığınız kaynak bulunamadı.",
+      "no_data": "Veri yok"
+    },
+    "action": {
+      "search_text": "Metin Ara"
+    }
+  }
+}

@@ -1,0 +1,134 @@
+<input class="form-control" ng-class="vm.loading" ng-model="vm.model.name" role="button" ng-disabled="!vm.isEditOn"
+       ng-keydown="vm.onKeyListener()" ng-click="vm.click()"
+       placeholder="{{vm.isLeft ? 'story_template.rules.params.select' : 'story_template.rules.params.selectOrEnter' |translate}}">
+<div ng-show="vm.isOpen" class="list-group dropDownOperand modalDropDownOperand" style="position: absolute !important;">
+
+    <!--Main menu for paremeters-->
+    <li role="button" class="list-group-item" ng-repeat="(key, params) in vm.dataList" ng-class="params.data[0].name"
+        ng-click="vm.selectParentParameter(key, $index)" ng-show="vm.isParentParametersShow===undefined">
+        <span data-translate>{{params.text}}</span>
+    </li>
+
+
+    <!--Single Select Dropdown-->
+    <div ng-repeat="(key, params) in vm.dataList" ng-show="vm.isInnerParametersShow[key]">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" role="button" ng-click="vm.back(key)">
+                <i class="fa fa-reply-all pr5" aria-hidden="true"></i>
+                <span data-translate> story_template.rules.params.all</span>
+            </li>
+            <li class="breadcrumb-item">
+                <span ng-if="key === 'eventData'" data-translate>{{(params.data[0].name|eventName).name}}</span>
+                <span ng-if="key === 'enrichmentData'" data-translate>{{params.data[0].name}}</span>
+                <span ng-if="key != 'enrichmentData' && key != 'eventData'" data-translate>{{params.text}}</span>
+            </li>
+        </ol>
+        <div class="list-group dropDownOperand scrollbar">
+            <li class="list-group-item too-long"
+                ng-repeat="param in params.data[0].params | filter:{name:vm.autoFillSearch} | orderBy:'name'"
+                ng-click="vm.setOperand(key, vm.dataList[key].data, param, $parent.$index)" role="button"
+                ng-class="params.data[0].name"
+                uib-tooltip="{{param.name}}" tooltip-enable="false" show-tooltip-on-text-overflow
+                tooltip-placement="bottom">
+                <span ng-if="key === 'eventData'" data-translate>{{(param.name|eventParameterName:params.data[0].name).name}}</span>
+                <span ng-if="key !== 'eventData'" data-translate>{{param.extras ? (param.extras|stringToObject).displayName : param.name}}</span>
+            </li>
+        </div>
+    </div>
+
+    <!--Multi Select Dropdown-->
+    <div ng-repeat="(key, params) in vm.dataList" ng-show="vm.isInnerParametersShowForMultiple[key]">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" role="button" ng-click="vm.back(key)"><i class="fa fa-reply-all pr5"
+                                                                                 aria-hidden="true"></i><span
+                    data-translate> story_template.rules.params.all</span></li>
+            <li class="breadcrumb-item">
+                <span data-translate>{{key === 'eventData' ? (params.data[0].name|eventName).name : params.text}}</span>
+            </li>
+        </ol>
+        <div class="list-group dropDownOperand scrollbar">
+            <li class="list-group-item too-long"
+                ng-repeat="param in params.data[0].params | filter:{name:vm.autoFillSearch} | orderBy:'name'"
+                ng-click="vm.setOperandForMultiple(key, vm.dataList[key].data, param, $parent.$index)" role="button"
+                ng-class="{selected: param.selected}"
+                uib-tooltip="{{param.name}}" tooltip-enable="false" show-tooltip-on-text-overflow
+                tooltip-placement="bottom">
+                {{param.name}}
+            </li>
+        </div>
+    </div>
+
+
+    <!--Enrichment Data Main Menu-->
+    <div ng-show="vm.enrichmentDataParentMenuShow">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" role="button" ng-click="vm.back(key)">
+                <i class="fa fa-reply-all pr5" aria-hidden="true"></i>
+                <span data-translate> story_template.rules.params.all</span>
+            </li>
+            <li class="breadcrumb-item"><span data-translate>{{vm.dataList.enrichmentData.text}}</span></li>
+        </ol>
+        <div class="scrollbar">
+            <div ng-repeat="(type, data) in vm.dataList.enrichmentData.data">
+                <li class="list-group-item " ng-repeat="enrichmentData in data" role="button"
+                    ng-click="vm.selectEnrichmentData(enrichmentData, type)">
+                    <span>{{(enrichmentData.name|enrichmentName).name}}</span>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <!--Enrichment Parameter List-->
+    <div ng-show="vm.selectedEnrichmentData.menuShow">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item" role="button" ng-click="vm.back(key)">
+                <i class="fa fa-reply-all pr5" aria-hidden="true"></i>
+                <span data-translate> story_template.rules.params.all</span>
+            </li>
+            <li class="breadcrumb-item">
+                <span data-translate>{{(vm.selectedEnrichmentData.name|enrichmentName).name}}</span>
+            </li>
+        </ol>
+        <div class="ruleItemInput">
+            <li class="list-group-item " ng-repeat="param in vm.selectedEnrichmentData.definition.parameters"
+                role="button" style="height: 88px;">
+                <label class="col-lg-4 col-form-label" data-translate>{{(param.value|enrichmentParameterName:vm.selectedEnrichmentData.name).name}}</label>
+                <div class="col-lg-12">
+                    <story-drop-down index="$index"
+                                     data="vm.dataList"
+                                     ng-readonly="true"
+                                     has-operator="false"
+                                     edit-on="vm.isEditOn"
+                                     ng-model="param.enteredValue">
+                </div>
+            </li>
+            <li class="list-group-item " ng-repeat="param in vm.selectedEnrichmentData.definition.methodParameters"
+                role="button" style="display: flex !important;">
+                <label class="col-lg-4 col-form-label" data-translate>{{(param.value|enrichmentParameterName:vm.selectedEnrichmentData.name).name}}</label>
+                <div class="col-lg-12">
+                    <story-drop-down index="$index"
+                                     data="vm.dataList"
+                                     ng-readonly="true"
+                                     has-operator="false"
+                                     edit-on="vm.isEditOn"
+                                     ng-model="param.enteredValue">
+                </div>
+            </li>
+            <li class="list-group-item " ng-repeat="param in vm.selectedEnrichmentData.definition.queryParameters"
+                role="button" style="display: flex !important;">
+                <label class="col-lg-4 col-form-label" data-translate>{{param.value}}</label>
+                <div class="col-lg-12">
+                    <story-drop-down index="$index"
+                                     data="vm.dataList"
+                                     ng-readonly="true"
+                                     has-operator="false"
+                                     edit-on="vm.isEditOn"
+                                     ng-model="param.enteredValue">
+                </div>
+            </li>
+        </div>
+        <button class="form-control" ng-click="vm.setEnrichmentDataParameter()"><span data-translate>story_template.rules.params.enrichment_data.ok</span>
+        </button>
+    </div>
+
+</div>

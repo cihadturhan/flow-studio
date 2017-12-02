@@ -1,0 +1,8 @@
+{
+  "autoflow-api-address": "https://dev-autoflow.odc.com.tr/autoflow-api/rest",
+  "serve-directory": "src",
+  "http-port": "80",
+  "https-port": "9094",
+  "https-key-file": "config/ssl/autoflow-localhost-key.pem",
+  "https-cert-file": "config/ssl/autoflow-localhost-cert.pem"
+}

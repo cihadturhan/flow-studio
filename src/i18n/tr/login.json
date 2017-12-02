@@ -1,0 +1,12 @@
+{
+  "login": {
+    "title": "SM Autoflow Giriş",
+    "username": {
+      "placeholder": "Kullanıcı Adı"
+    },
+    "password": {
+      "placeholder": "Parola"
+    },
+    "button": "Giriş"
+  }
+}

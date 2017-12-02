@@ -1,0 +1,5 @@
+{
+  "autoflow-api-address": "https://test-autoflow.odc.com.tr/autoflow-api/rest",
+  "serve-directory": "src",
+  "http-port": "9094"
+}

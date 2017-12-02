@@ -1,0 +1,26 @@
+{
+  "dataSource": {
+    "title": "Veri Kaynağı",
+    "name": "İsim",
+    "type": "Kaynak Tipi",
+    "description": "Açıklama",
+    "definition": {
+      "driver": "Driver",
+      "connection_string": "Bağlantı Dizesi",
+      "user": "Kulllanıcı Adı",
+      "password": "Parola",
+      "endpoint": "Uç Nokta"
+    },
+    "operations": {
+      "title": "İşlemler",
+      "detail": "Detay",
+      "delete": "Sil"
+    },
+    "warning" : {
+      "delete" : {
+        "title" : "<strong>{{name}}</strong> Veri Kaynağını Sil",
+        "message" : "Bu veri kaynağını silmek istediğinizden emin misiniz?"
+      }
+    }
+  }
+}

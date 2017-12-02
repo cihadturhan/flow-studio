@@ -1,0 +1,41 @@
+{
+  "story_monitoring": {
+    "title": "Story Monitoring",
+    "stepDistribution": "Step Distribution",
+    "titles": {
+      "startDate": "Start : {{param}}",
+      "stopDate": "Stop : {{param}}",
+      "remainingTime": "Remaining Time : {{param}}",
+      "totalCustomers": "Total Number of Customers",
+      "totalActions": "Total Number of actions executed",
+      "totalEvents": "Total Number of events processed",
+      "remainingTime": "Remaining time",
+      "reportVars": "Report Variables",
+      "actionStats": "Action Stats",
+      "eventStats": "Event Stats",
+      "details": "Details",
+      "stepDists": {
+        "min": "Step Change(Last 5 min)",
+        "hour": "Step Change(Last 5 hour)",
+        "day": "Step Change(Last 5 day)",
+        "week": "Step Change(Last 5 week)"
+      },
+      "stepChanges": {
+        "sec": "s",
+        "min": "m",
+        "hour": "h",
+        "day": "d"
+      },
+      "stepDist": "Step Distribution",
+      "noData": "No Data",
+      "noDataYet": "No Data Yet",
+      "minute": "Minute",
+      "hour": "Hour",
+      "day": "Day",
+      "week": "Week"
+    },
+    "day": "Day",
+    "hour": "Hour",
+    "minute": "Minute"
+  }
+}

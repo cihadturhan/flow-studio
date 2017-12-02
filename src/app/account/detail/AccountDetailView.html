@@ -1,0 +1,16 @@
+<div class="content-wrapper" style="min-height: 916px;">
+    <alert></alert>
+    <alert-error></alert-error>
+    <div class="col-lg-12">
+        <table class="table table-sm table-hover account-table">
+            <tbody>
+            <tr ng-repeat="field in vm.fields">
+                <td style="width: 30%" data-translate>{{field.text}}</td>
+                <td>{{vm.model[field.name]}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

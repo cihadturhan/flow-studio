@@ -1,0 +1,7 @@
+<ul>
+    <li ng-repeat='figure in vm.editor.palette'>
+            <!--<image src="{{figure.config.image}}" class="palette_node_element" tooltips tooltip-template='{{figure.name | translate}}' ng-cloak></image>-->
+            <div data-shape='{{figure.class}}' class="palette_node_element draw2d_droppable ui-draggable"><span data-translate>{{figure.name}}</span></div>
+        <!--<span data-translate>{{figure.name}}</span>-->
+    </li>
+</ul>

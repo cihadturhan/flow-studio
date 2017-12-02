@@ -1,0 +1,5 @@
+{
+  "autoflow-api-address": "https://preprod.smartmessage-autoflow.com/autoflow-api/rest",
+  "serve-directory": "src",
+  "http-port": "9094"
+}

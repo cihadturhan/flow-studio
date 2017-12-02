@@ -1,0 +1,54 @@
+<div ng-model="vm.ruleItem" class="form-group row">
+    <div class="row mb10">
+        <div class="ruleItemInput">
+            <story-drop-down rule-item-index="vm.ruleItemIndex"
+                             rule-group-index="vm.ruleGroupIndex"
+                             ng-readonly="true"
+                             data="vm.dropDownDataList"
+                             has-operator="true"
+                             edit-on="vm.isEditOn"
+                             auto-fill="vm.autoFill"
+                             is-left="true"
+                             anchor="vm.anchor"
+                             enrichment-data="vm.enrichmentData"
+                             selected-enrichment="vm.selectedEnrichments.leftOperand"
+                             ng-model="vm.ruleItem.leftOperand"
+                             rule-item="vm.ruleItem">
+            </story-drop-down>
+        </div>
+        <div class="ruleItemInput">
+            <select class="form-control"
+                    ng-disabled="!vm.isEditOn"
+                    ng-model="vm.ruleItem.operation"
+                    ng-options="opr.key as opr.text for opr in vm.operators[vm.operatorTypes[vm.ruleItem.leftOperand.type]] | filterOperator:vm.ruleItem.leftOperand.availableOperators">
+                    <!--ng-options="opr as opr| filterOperator:vm.ruleItem.leftOperand.availableOperators for opr in vm.operators[vm.operatorTypes[vm.ruleItem.leftOperand.type]]">-->
+                <option value="" disabled selected>{{'story_template.rules.params.select'|translate}}</option>
+            </select>
+        </div>
+
+        <div class="ruleItemInput">
+            <story-drop-down rule-item-index="vm.ruleItemIndex"
+                             rule-group-index="vm.ruleGroupIndex"
+                             data="vm.dropDownDataList"
+                             has-operator="true"
+                             edit-on="vm.isEditOn"
+                             auto-fill="vm.autoFill"
+                             is-left="false"
+                             anchor="vm.anchor"
+                             operation="vm.ruleItem.operation"
+                             ng-model="vm.ruleItem.rightOperand"
+                             rule-item="vm.ruleItem"
+                             rule-items="vm.ruleItems"
+                             enrichment-data="vm.enrichmentData"
+                             selected-enrichment="vm.selectedEnrichments.rightOperand"
+                             pre-post-operations="vm.prePostOperations"
+                             loading="vm.ruleItem.rightOperand.loading">
+            </story-drop-down>
+        </div>
+
+        <div class="col-lg-1">
+            <button ng-click="vm.removeRuleItem(vm.ruleItemIndex)" class="button-remove fa button-icon mt33"
+                    ng-if="vm.isEditOn && !vm.ruleItem.default"></button>
+        </div>
+    </div>
+</div>

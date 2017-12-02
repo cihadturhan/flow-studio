@@ -1,0 +1,35 @@
+.controllable-table {
+  cursor: pointer; }
+  .controllable-table th.md-checkbox-column, .controllable-table td.md-checkbox-cell {
+    display: none; }
+
+table[md-table] td.active-cell {
+  border: 2px #5292f7 solid !important; }
+
+table[md-table] th.md-column {
+  border: 0.5px inset rgba(0, 0, 0, 0.12);
+  border-collapse: collapse;
+  border-spacing: 0;
+  background-color: #f2f2f2;
+  -webkit-background-clip: padding-box;
+  /* for Safari */
+  background-clip: padding-box;
+  /* for IE9+, Firefox 4+, Opera, Chrome */ }
+
+table[md-table].md-row-select td.md-cell:first-child, table[md-table].md-row-select th.md-column:first-child {
+  padding: 0 12px 0 12px; }
+
+table[md-table] td.md-cell {
+  border: 0.5px inset rgba(0, 0, 0, 0.12);
+  border-collapse: collapse;
+  border-spacing: 0;
+  -webkit-background-clip: padding-box;
+  /* for Safari */
+  background-clip: padding-box;
+  /* for IE9+, Firefox 4+, Opera, Chrome */ }
+
+table[md-table] .md-checkbox-column, table[md-table] .md-checkbox-cell {
+  display: none; }
+
+md-checkbox.no-bottom-margin {
+  margin-bottom: 0; }

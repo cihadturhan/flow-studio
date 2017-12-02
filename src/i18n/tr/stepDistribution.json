@@ -1,0 +1,15 @@
+{
+  "step_distribution": {
+    "title": "Adım Dağılımı",
+    "titles": {
+      "next": "Sonraki",
+      "prev": "Önceki",
+      "back": "Geri",
+      "steps": "Adımlar",
+      "filter": "Filtrele",
+      "key": "Kullanıcı Bilgisi",
+      "stepName": "Step",
+      "export": "Rapor Oluştur"
+    }
+  }
+}

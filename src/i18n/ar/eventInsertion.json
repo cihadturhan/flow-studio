@@ -1,0 +1,10 @@
+{
+  "eventInsertion":{
+    "title": "Create Event",
+    "titles": {
+      "story_name": "Story Name",
+      "event_name": "Event Name",
+      "story_key": "Unique ID"
+    }
+  }
+}

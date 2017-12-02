@@ -1,0 +1,14 @@
+{
+  "dashboard": {
+    "title": "Dashboard",
+    "smart": {
+      "missing_story_id": "Missing story info."
+    },
+    "filters": {
+      "sort_by": "Sort By",
+      "start_date": "Start Date",
+      "stop_date": "Stop Date",
+      "story_name": "Story Name"
+    }
+  }
+}

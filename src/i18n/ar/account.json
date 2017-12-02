@@ -1,0 +1,12 @@
+{
+  "account": {
+    "title": "الحساب",
+    "status": "الحالة",
+    "subscription_type": "نوع الاشتراك",
+    "creation_date": "تاريخ الإنشاء",
+    "api_key": "مفتاح",
+    "subscription_date": "تاريخ الاشتراك",
+    "name": "اسم",
+    "session_expired": "انتهت صلاحية الجلسة"
+  }
+}

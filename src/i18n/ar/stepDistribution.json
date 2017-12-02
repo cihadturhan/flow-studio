@@ -1,0 +1,15 @@
+{
+  "step_distribution": {
+    "title": "Step Distribution",
+    "titles": {
+      "next": "Next",
+      "prev": "Previous",
+      "back": "Back",
+      "steps": "Steps",
+      "filter": "Filter",
+      "key": "User Key",
+      "stepName": "Step Name",
+      "export": "Export"
+    }
+  }
+}

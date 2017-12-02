@@ -1,0 +1,10 @@
+{
+  "eventInsertion":{
+    "title": "Olay Oluştur",
+    "titles": {
+      "story_name": "Senaryo Adı",
+      "event_name": "Olay Adı",
+      "story_key": "Tekil ID"
+    }
+  }
+}

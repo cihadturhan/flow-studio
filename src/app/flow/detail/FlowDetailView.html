@@ -1,0 +1,30 @@
+<div class="content-wrapper" id="container" style="min-height: 916px;">
+    <alert></alert>
+    <alert-error></alert-error>
+
+    <div class="row">
+        <div class="col-md-2 col-xs-2 pull-right">
+            <div class="palette first-palette" autoflow-palette></div>
+            <div class="palette second-palette" ng-style="vm.resizePalette()" style="overflow-y: auto;overflow-x: hidden" resize>
+                <div class="box box-solid collapsed-box" ng-repeat="(key, item) in vm.dataList">
+                    <div class="box-header with-border">
+                        <label class="box-title" data-translate>{{item.text}}</label>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10 col-xs-10">
+            <div id="toolbar" class="navbar-default">
+            </div>
+
+            <div id="autoflow-canvas" ng-style="vm.resizeCanvas()" auto-flow-canvas ng-model="vm.flow" canvas="vm.editor.canvas" resize></div>
+        </div>
+    </div>
+
+</div>
+</div>

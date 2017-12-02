@@ -1,0 +1,118 @@
+<alert></alert>
+<alert-error></alert-error>
+<div class="modal-header">
+    <h4 class="modal-title">
+        <span data-translate ng-if="!vm.isDraft">flow.create.title</span>
+        <span data-translate ng-if="vm.isDraft">flow.create.draft</span>
+    </h4>
+</div>
+<form name="form" class="story-detail">
+    <div id="flowCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#flowCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#flowCarousel" data-slide-to="1"></li>
+        </ol>
+        <div class="carousel-inner carousel-fixed" role="listbox">
+            <div class="item active" id="types">
+                <div class="form-group col-lg-12" ng-repeat="(reportType, reportData) in vm.dataList">
+                    <div ng-click="vm.dataListStatus[reportType]=!vm.dataListStatus[reportType]">
+                        <div class="form-group col-lg-12" data-toggle="collapse in"
+                             data-parent="#types"
+                             href="#{{reportType}}" class="collapsed" aria-expanded="false"
+                             ng-class="{'fa fa-chevron-down': vm.dataListStatus[reportType], 'fa fa-chevron-right': !vm.dataListStatus[reportType] }">
+
+                            <span class="report-item-list" data-translate>{{reportData.text}}</span>
+                        </div>
+                    </div>
+                    <div id="{{reportType}}" class="panel-collapse"
+                         ng-class="{'collapse in': vm.dataListStatus[reportType], 'collapse': !vm.dataListStatus[reportType] }"
+                         aria-expanded="false">
+                        <div ng-repeat="reportItem in reportData.data">
+                            <div class="box-body report-items">
+                                <input type="checkbox" ng-model="reportItem.visible" name="option-field" ng-checked="reportItem.visible"/>
+                                <span>{{reportItem.displayName ? reportItem.displayName : reportItem.value}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-default pull-left" href="#flowCarousel" data-slide="next"
+                        data-interval="false" data-translate="">global.buttons.next
+                </button>
+            </div>
+
+            <div class="item">
+                <div class="form-group col-lg-12 mt20">
+                    <label class="col-lg-2 col-form-label" data-translate>story_template.name.title</label>
+                    <div class="col-lg-4" ng-class="{'has-error' : form.name.$invalid && !form.name.$pristine}">
+                        <input name="name"
+                               class="form-control form-control ng-valid-maxlength ng-dirty ng-valid-parse ng-touched ng-valid-minlength ng-invalid ng-invalid-required"
+                               ng-required="vm.activeButtonType != vm.buttonTypes.draft"
+                               ng-model="vm.model.storyDefinition.storyName">
+                        <p ng-show="form.name.$error.required" class="help-block" data-translate>
+                            story_template.name.errors.required</p>
+                    </div>
+                </div>
+                <div class="form-group col-lg-12">
+                    <label class="col-lg-2 col-form-label" data-translate>story_template.start_date.title</label>
+                    <div class="col-lg-4">
+                        <div class='input-group datetimepicker selectDatePicker'>
+                            <input type="text" class="form-control"
+                                   ng-readonly="true"
+                                   ng-required="vm.activeButtonType != vm.buttonTypes.draft"
+                                   ng-model="vm.model.storyDefinition.startDate"
+                                   datetimepicker
+                                   options="vm.startDatePickerOptions"
+                                   placeholder="{{'story_template.start_date.title' | translate }}"
+                                   name="startDate"
+                                   ng-change="vm.changeDate(vm.model.storyDefinition.startDate, vm.model.storyDefinition.stopDate)">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        <p ng-show="form.startDate.$error.required" class="help-block" data-translate>
+                            story_template.start_date.errors.required</p>
+                    </div>
+                </div>
+                <div class="form-group col-lg-12">
+                    <label class="col-lg-2 col-form-label" data-translate="">story_template.stop_date.title</label>
+                    <div class="col-lg-4">
+                        <div class='input-group datetimepicker selectDatePicker'>
+                            <input type="text" class="form-control"
+                                   ng-required="false"
+                                   ng-readonly="true"
+                                   ng-model="vm.model.storyDefinition.stopDate"
+                                   datetimepicker
+                                   options="vm.stopDatePickerOptions"
+                                   placeholder="{{'story_template.stop_date.title' | translate }}"
+                                   name="stopDate"
+                                   ng-change="vm.changeDate(vm.model.storyDefinition.startDate, vm.model.storyDefinition.stopDate)">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-12 mt20">
+
+                    <button type="submit" class="btn btn-default pull-right " ng-click="vm.start()"
+                            ng-disabled="!form.$valid" ng-if="vm.activeButtonType != vm.buttonTypes.draft">
+                        <span data-translate ng-if="vm.isDashboard">global.buttons.update</span>
+                        <span data-translate ng-if="!vm.isDashboard">global.buttons.deploy</span>
+                    </button>
+                    <button type="submit" class="btn btn-default pull-right " ng-click="vm.draft()"
+                            ng-if="vm.activeButtonType == vm.buttonTypes.draft">
+                        <span data-translate>global.buttons.draft</span>
+                    </button>
+
+                    <button class="btn btn-default pull-right mr10" ng-click="vm.cancel()">
+                        <span data-translate>global.buttons.cancel</span>
+                    </button>
+                </div>
+                <button type="button" class="btn btn-default pull-left" href="#flowCarousel" data-slide="prev"
+                        data-interval="false" data-translate="">global.buttons.back
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

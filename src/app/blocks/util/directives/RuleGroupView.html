@@ -1,0 +1,51 @@
+<div ng-model="vm.ruleGroup">
+    <div class="form-inline" style="padding-bottom: 10px;">
+        <select ng-model="vm.ruleGroup.groupOperator" class="form-control input-sm ng-pristine ng-valid" ng-disabled="!vm.isEditOn"
+                ng-options="logicOperator.value as logicOperator.text|translate for logicOperator in vm.logicOperators" data-translate>
+        </select>
+        <button style="margin-left: 5px" ng-click="vm.addRuleItem()" class="btn btn-sm btn-success" ng-disabled="!vm.isEditOn" data-translate><span
+                class="glyphicon glyphicon-plus-sign"></span> story_template.rules.buttons.add_condition
+        </button>
+        <button style="margin-left: 5px" ng-click="vm.addInnerRuleGroup()" class="btn btn-sm btn-primary" ng-disabled="!vm.isEditOn" data-translate><span
+                class="glyphicon glyphicon-plus-sign"></span> story_template.rules.buttons.add_inner_group
+        </button>
+        <button style="margin-left: 5px" ng-click="vm.removeGroup()" class="btn btn-sm btn-danger" ng-if="!vm.hasDefault" ng-disabled="!vm.isEditOn" data-translate><span
+                class="glyphicon glyphicon-minus-sign"></span> story_template.rules.buttons.remove_group
+        </button>
+    </div>
+
+    <div class="form-inline" ng-repeat="ruleItem in vm.ruleGroup.ruleItems">
+        <rule-item ng-if="ruleItem.type==='item'"
+                   ng-model="ruleItem"
+                   rule-items="vm.ruleGroup.ruleItems"
+                   index="$index"
+                   rule-group-index="vm.ruleGroupIndex"
+                   drop-down-data-list="vm.dropDownDataList"
+                   edit-on="vm.isEditOn"
+                   auto-fill="vm.autoFill"
+                   anchor="vm.anchor"
+                   operation="vm.operation"
+                   enrichment-data="vm.enrichmentData"
+                   selected-enrichments="vm.selectedEnrichments[$index]"
+                   pre-post-operations="vm.prePostOperations"
+                   operators="vm.operators">
+        </rule-item>
+        <rule-group ng-if="ruleItem.type==='group'"
+                    ng-model="ruleItem"
+                    rule-groups="vm.ruleGroup.ruleItems"
+                    index="$index"
+                    rule-group-index="vm.ruleGroupIndex"
+                    drop-down-data-list="vm.dropDownDataList"
+                    edit-on="vm.isEditOn"
+                    auto-fill="vm.autoFill"
+                    anchor="vm.anchor[$index]"
+                    operation="vm.operation"
+                    enrichment-data="vm.enrichmentData"
+                    selected-enrichment="vm.selectedEnrichments[$index]"
+                    left-selected-enrichments="vm.leftSelectedEnrichments"
+                    right-selected-enrichments="vm.rightSelectedEnrichments"
+                    pre-post-operations="vm.prePostOperations"
+                    operators="vm.operators"></rule-group>
+    </div>
+</div>
+
