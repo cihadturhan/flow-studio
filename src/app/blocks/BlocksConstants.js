@@ -5,6 +5,6 @@
         .module('app.blocks')
         .constant('VERSION', "2.0.0")
         .constant('DEBUG_INFO_ENABLED', true)
-        .constant('API_URI', "https://test-autoflow.odc.com.tr/autoflow-api/rest")
+        .constant('API_URI', "https://dev-autoflow.odc.com.tr/autoflow-api/rest")
 ;
 })();

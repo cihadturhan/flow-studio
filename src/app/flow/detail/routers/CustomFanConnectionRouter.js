@@ -38,6 +38,9 @@ draw2d.layout.connection.CustomFanConnectionRouter = draw2d.layout.connection.Di
     route: function(conn, routingHints)
     {
         var lines = conn.getSource().getConnections().clone();
+        var targetLines = conn.getTarget().getConnections().clone();
+        lines.addAll(targetLines, true);
+
         lines.grep(function(other){
             return other.getTarget() === conn.getTarget() || other.getSource() === conn.getTarget();
         });
@@ -64,9 +67,10 @@ draw2d.layout.connection.CustomFanConnectionRouter = draw2d.layout.connection.Di
         var start = conn.getStartPoint();
         var end = conn.getEndPoint();
 
-        var separation = 15;
+        var separation = 90;
 
-        var midPoint = new draw2d.geo.Point((end.x + start.x) / 2, (end.y + start.y) / 2);
+        var querterPoint = new draw2d.geo.Point((end.x + 3*start.x) / 4, (end.y + 3 * start.y) / 4);
+        var thirdQuerterPoint = new draw2d.geo.Point((3 * end.x + start.x) / 4, (3 * end.y + start.y) / 4);
         var position = end.getPosition(start);
         var ray;
         if (position == draw2d.geo.PositionConstants.SOUTH || position == draw2d.geo.PositionConstants.EAST){
@@ -81,18 +85,24 @@ draw2d.layout.connection.CustomFanConnectionRouter = draw2d.layout.connection.Di
         var xSeparation = separation * ray.x / length;
         var ySeparation = separation * ray.y / length;
 
-        var bendPoint;
+        var bendPoint1, bendPoint2;
 
         if (index % 2 === 0){
-            bendPoint = new draw2d.geo.Point(midPoint.x + (index / 2) * (-1 * ySeparation), midPoint.y + (index / 2) * xSeparation);
+            if (index !== 0) {
+                index = index - 1;
+            }
+            bendPoint1 = new draw2d.geo.Point(querterPoint.x + (index / 2) * (-1 * ySeparation), querterPoint.y + (index / 2) * xSeparation);
+            bendPoint2 =   new draw2d.geo.Point(thirdQuerterPoint.x + (index / 2) * (-1 * ySeparation), thirdQuerterPoint.y + (index / 2) * xSeparation);
         }
         else{
-            bendPoint = new draw2d.geo.Point(midPoint.x + (index / 2) * ySeparation, midPoint.y + (index / 2) * (-1 * xSeparation));
+            bendPoint1 = new draw2d.geo.Point(querterPoint.x + (index / 2) * ySeparation, querterPoint.y + (index / 2) * (-1 * xSeparation));
+            bendPoint2 = new draw2d.geo.Point(thirdQuerterPoint.x + (index / 2) * ySeparation, thirdQuerterPoint.y + (index / 2) * (-1 * xSeparation));
         }
 
         // required for hit tests
         conn.addPoint(start);
-        conn.addPoint(bendPoint);
+        conn.addPoint(bendPoint1);
+        conn.addPoint(bendPoint2);
         conn.addPoint(end);
 
         // calculate the path string for the SVG rendering

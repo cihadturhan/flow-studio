@@ -84,9 +84,7 @@
                 dialog.closePromise.then(onCloseEventDialog);
             }
 
-            //vm.connection.setRouter(new draw2d.layout.connection.DirectRouter());
-            //vm.connection.setRouter(new draw2d.layout.connection.InteractiveManhattanConnectionRouter());
-            vm.connection.setRouter(new draw2d.layout.connection.FanConnectionRouter());
+            vm.connection.setRouter(new draw2d.layout.connection.CustomFanConnectionRouter());
             vm.connection.setTargetDecorator(new draw2d.decoration.connection.ArrowDecorator(17, 8));
             return vm.connection;
 

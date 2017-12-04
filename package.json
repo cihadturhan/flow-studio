@@ -62,7 +62,7 @@
     "lazypipe": "^1.0.1",
     "main-bower-files": "^2.13.1",
     "node-gyp": "^3.6.0",
-    "node-sass": "^4.5.2",
+    "node-sass": "^4.7.2",
     "proxy-middleware": "^0.15.0",
     "run-sequence": "^1.2.2"
   }
