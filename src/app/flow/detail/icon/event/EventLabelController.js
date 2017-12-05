@@ -48,6 +48,22 @@
                             "required": false
                         }
                     ]
+                },
+                {
+                    "eventName": "READ",
+                    "eventType": "External",
+                    "params": [
+                        {
+                            "name": "memberId",
+                            "type": "String",
+                            "required": false
+                        },
+                        {
+                            "name": "email",
+                            "type": "String",
+                            "required": false
+                        }
+                    ]
                 }
             ];
 

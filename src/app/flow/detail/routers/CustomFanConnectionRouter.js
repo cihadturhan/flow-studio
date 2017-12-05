@@ -1,13 +1,17 @@
 draw2d.layout.connection.CustomFanConnectionRouter = draw2d.layout.connection.DirectRouter.extend({
-    NAME : "draw2d.layout.connection.CustomFanConnectionRouter",
+    NAME: "draw2d.layout.connection.CustomFanConnectionRouter",
 
     /**
      * @constructor Creates a new Router object.
      */
-    init: function()
-    {
+    init: function () {
         this._super();
 
+        this.spline = new draw2d.util.spline.CubicSpline();
+//        this.spline = new draw2d.util.spline.BezierSpline();
+
+        this.MINDIST = 50;
+        this.cheapRouter = null;
     },
 
 
@@ -19,8 +23,7 @@ draw2d.layout.connection.CustomFanConnectionRouter = draw2d.layout.connection.Di
      * @template
      * @since 2.7.2
      */
-    onInstall: function(connection)
-    {
+    onInstall: function (connection) {
         connection.installEditPolicy(new draw2d.policy.line.LineSelectionFeedbackPolicy());
 
     },
@@ -35,48 +38,49 @@ draw2d.layout.connection.CustomFanConnectionRouter = draw2d.layout.connection.Di
      * @param {Boolean} routingHints.startMoved is true if just the start location has moved
      * @param {Boolean} routingHints.destMoved is true if the destination location has changed
      */
-    route: function(conn, routingHints)
-    {
-        var lines = conn.getSource().getConnections().clone();
-        var targetLines = conn.getTarget().getConnections().clone();
-        lines.addAll(targetLines, true);
+    route: function (conn, routingHints) {
+        var source = conn.getSource().getParent(), target = conn.getTarget().getParent();
+        //Self connection
+        if (source === target) {
+            return this.selfRoute(conn, routingHints);
+        }
+        var position = target.getPosition().getPosition(source.getPosition());
+        var isConnectionNormal = position === draw2d.geo.PositionConstants.SOUTH || position === draw2d.geo.PositionConstants.EAST;
+        var lines;
+        if (isConnectionNormal) {
+            lines = source.getConnections().clone();
+            lines.addAll(target.getConnections().clone(), true);
+        } else {
+            lines = target.getConnections().clone();
+            lines.addAll(source.getConnections().clone(), true);
+        }
 
-        lines.grep(function(other){
-            return other.getTarget() === conn.getTarget() || other.getSource() === conn.getTarget();
+
+        lines.grep(function (other) {
+            return other.getSource().getParent() === source && other.getTarget().getParent() === target ||
+                other.getTarget().getParent() === source && other.getSource().getParent() === target;
         });
 
-        if (lines.getSize() > 1){
+        if (lines.getSize() > 1) {
             this.routeCollision(conn, lines.indexOf(conn));
         }
-        else{
+        else {
             this._super(conn, routingHints);
         }
     },
 
-    /**
-     * @method
-     * route the connection if connections overlap. Two connections overlap if the combination
-     * of source and target anchors are equal.
-     *
-     * @param {draw2d.Connection} conn
-     * @param {Number} index
-     */
-    routeCollision: function(conn, index)
-    {
-        index = index+1;
-        var start = conn.getStartPoint();
-        var end = conn.getEndPoint();
+    selfRoute: function (conn, routingHints) {
+        var start = new draw2d.geo.Point(conn.getStartX(), conn.getStartY());
+        var end = new draw2d.geo.Point(conn.getEndX(), conn.getEndY());
 
         var separation = 90;
 
-        var querterPoint = new draw2d.geo.Point((end.x + 3*start.x) / 4, (end.y + 3 * start.y) / 4);
-        var thirdQuerterPoint = new draw2d.geo.Point((3 * end.x + start.x) / 4, (3 * end.y + start.y) / 4);
         var position = end.getPosition(start);
+        var isPositionNormal = position === draw2d.geo.PositionConstants.SOUTH || position === draw2d.geo.PositionConstants.EAST;
         var ray;
-        if (position == draw2d.geo.PositionConstants.SOUTH || position == draw2d.geo.PositionConstants.EAST){
+        if (isPositionNormal) {
             ray = new draw2d.geo.Point(end.x - start.x, end.y - start.y);
-        }
-        else{
+        } else {
             ray = new draw2d.geo.Point(start.x - end.x, start.y - end.y);
         }
 
@@ -87,19 +91,85 @@ draw2d.layout.connection.CustomFanConnectionRouter = draw2d.layout.connection.Di
 
         var bendPoint1, bendPoint2;
 
-        if (index % 2 === 0){
+        bendPoint1 = new draw2d.geo.Point(start.x + (-1 * (ySeparation + xSeparation*0.5)), start.y + xSeparation);
+        bendPoint2 = new draw2d.geo.Point(end.x + (-1 * (ySeparation - xSeparation * 0.5)), end.y + xSeparation);
+
+
+        // required for hit tests
+        conn.addPoint(start);
+        conn.addPoint(bendPoint1);
+        conn.addPoint(bendPoint2);
+        conn.addPoint(end);
+
+
+        var ps = conn.getVertices();
+
+        conn.oldPoint = null;
+        conn.lineSegments = new draw2d.util.ArrayList();
+        conn.vertices = new draw2d.util.ArrayList();
+
+        var splinePoints = this.spline.generate(ps, 8);
+        splinePoints.each(function (i, e) {
+            conn.addPoint(e);
+        });
+
+        // calculate the path string for the SVG rendering
+        ps = conn.getVertices();
+        var size = ps.getSize();
+        var p = ps.get(0);
+        var path = ["M", p.x, " ", p.y];
+        for (var i = 1; i < size; i++) {
+            p = ps.get(i);
+            path.push("L", p.x, " ", p.y);
+        }
+        conn.svgPathString = path.join("");
+    },
+
+    /**
+     * @method
+     * route the connection if connections overlap. Two connections overlap if the combination
+     * of source and target anchors are equal.
+     *
+     * @param {draw2d.Connection} conn
+     * @param {Number} index
+     */
+    routeCollision: function (conn, index) {
+        index = index + 1;
+        var start = conn.getStartPoint();
+        var end = conn.getEndPoint();
+
+        var separation = 90;
+
+        var querterPoint = new draw2d.geo.Point((end.x + 3 * start.x) / 4, (end.y + 3 * start.y) / 4);
+        var thirdQuerterPoint = new draw2d.geo.Point((3 * end.x + start.x) / 4, (3 * end.y + start.y) / 4);
+        var position = end.getPosition(start);
+        var isPositionNormal = position === draw2d.geo.PositionConstants.SOUTH || position === draw2d.geo.PositionConstants.EAST;
+        var ray;
+        if (isPositionNormal) {
+            ray = new draw2d.geo.Point(end.x - start.x, end.y - start.y);
+        } else {
+            ray = new draw2d.geo.Point(start.x - end.x, start.y - end.y);
+        }
+
+        var length = Math.sqrt(ray.x * ray.x + ray.y * ray.y);
+
+        var xSeparation = separation * ray.x / length;
+        var ySeparation = separation * ray.y / length;
+
+        var bendPoint1, bendPoint2;
+
+        if (index % 2 === 0) {
             if (index !== 0) {
                 index = index - 1;
             }
             bendPoint1 = new draw2d.geo.Point(querterPoint.x + (index / 2) * (-1 * ySeparation), querterPoint.y + (index / 2) * xSeparation);
-            bendPoint2 =   new draw2d.geo.Point(thirdQuerterPoint.x + (index / 2) * (-1 * ySeparation), thirdQuerterPoint.y + (index / 2) * xSeparation);
+            bendPoint2 = new draw2d.geo.Point(thirdQuerterPoint.x + (index / 2) * (-1 * ySeparation), thirdQuerterPoint.y + (index / 2) * xSeparation);
         }
-        else{
+        else {
             bendPoint1 = new draw2d.geo.Point(querterPoint.x + (index / 2) * ySeparation, querterPoint.y + (index / 2) * (-1 * xSeparation));
             bendPoint2 = new draw2d.geo.Point(thirdQuerterPoint.x + (index / 2) * ySeparation, thirdQuerterPoint.y + (index / 2) * (-1 * xSeparation));
         }
 
-        // required for hit tests
         conn.addPoint(start);
         conn.addPoint(bendPoint1);
         conn.addPoint(bendPoint2);
@@ -108,6 +178,6 @@ draw2d.layout.connection.CustomFanConnectionRouter = draw2d.layout.connection.Di
         // calculate the path string for the SVG rendering
         //
         this._paint(conn);
-    }
+    },
 
 });

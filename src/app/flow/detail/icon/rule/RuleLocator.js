@@ -37,15 +37,19 @@
             function relocate(index, target) {
                 var distanceFromConnection = -5;
                 var conn = target.getParent();
-                var points = conn.getVertices();
+                //var points = conn.getVertices();
 
-                var segmentIndex = Math.floor((points.getSize() - 2) / 2.5);
+                var totalLength = conn.shape.node.getTotalLength();
+                var p1 = conn.shape.node.getPointAtLength(0.8 * totalLength);
+                var p2 = conn.shape.node.getPointAtLength(0.9 * totalLength);
+
+                /*var segmentIndex = Math.floor((points.getSize() - 2) / 2.5);
                 if (points.getSize() <= segmentIndex + 1) {
                     return;
                 }
 
                 var p1 = points.get(segmentIndex);
-                var p2 = points.get(segmentIndex + 1);
+                var p2 = points.get(segmentIndex + 1);*/
 
                 // calculate the distance of the label (above or below the connection)
                 var distance = distanceFromConnection <= 0 ? distanceFromConnection - target.getHeight() : distanceFromConnection;
