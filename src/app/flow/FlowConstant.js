@@ -122,6 +122,38 @@
                             config: {
                                 name: "autoflow.canvas.basic.locator.event_locator"
                             }
+                        },
+                        vertical_input_port_locator: {
+                            config: {
+                                name: "autoflow.canvas.locator.vertical_input_port_locator"
+                            }
+                        },
+                        vertical_output_port_locator: {
+                            config: {
+                                name: "autoflow.canvas.locator.vertical_output_port_locator"
+                            }
+                        }
+                    },
+                    router: {
+                        collision_avoiding_manhattan_router: {
+                            config: {
+                                name: "autoflow.canvas.router.collision_avoiding_manhattan_router"
+                            },
+                            attr: {
+                                MINDIST: 20,
+                                TOL: 0.1,
+                                TOLxTOL: 0.01,
+                                TOGGLE_DIST: 20
+                            }
+                        },
+                        custom_fan_router: {
+                            config: {
+                                name: 'autflow.config.router.custom_fan_router'
+                            },
+                            attr: {
+                                SEPARATION: 100,
+                                EPSILON: 5
+                            }
                         }
                     },
                     layout: {

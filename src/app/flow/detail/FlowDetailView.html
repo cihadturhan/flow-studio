@@ -20,6 +20,7 @@
         </div>
         <div class="col-md-10 col-xs-10">
             <div id="toolbar" class="navbar-default">
+                <button class="btn btn-success" ng-click="vm.exportCanvas()">Kaydet</button>
             </div>
 
             <div id="autoflow-canvas" ng-style="vm.resizeCanvas()" auto-flow-canvas ng-model="vm.flow" canvas="vm.editor.canvas" resize></div>

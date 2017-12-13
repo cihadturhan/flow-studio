@@ -13,10 +13,12 @@
         '$injector',
         'CANVAS',
         'EventConnection',
-        'AutoFlowCanvasStory'
+        'AutoFlowCanvasStory',
+        'VerticalInputPortLocator',
+        'VerticalOutputPortLocator'
     ];
     /* @ngInject */
-    function StartStepIconService($injector, CANVAS, EventConnection, AutoFlowCanvasStory) {
+    function StartStepIconService($injector, CANVAS, EventConnection, AutoFlowCanvasStory, VerticalInputPortLocator,VerticalOutputPortLocator) {
         var vm = this;
 
         vm.create = create;
@@ -35,8 +37,8 @@
             });
 
             vm.startStep = new startStep(CANVAS.icon.start_step.attr);
-            vm.startStep.createPort("input", new draw2d.layout.locator.VerticalInputPortLocator());
-            vm.startStep.createPort("output", new draw2d.layout.locator.VerticalOutputPortLocator());
+            vm.startStep.createPort("input", VerticalInputPortLocator.create());
+            vm.startStep.createPort("output", VerticalOutputPortLocator.create());
 
 
             if (attributes) {

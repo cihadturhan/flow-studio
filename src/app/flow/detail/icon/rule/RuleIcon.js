@@ -15,10 +15,12 @@
         'RuleLabel',
         'RuleConnection',
         'AutoFlowCanvasStory',
+        'VerticalInputPortLocator',
+        'VerticalOutputPortLocator'
     ];
 
     /* @ngInject */
-    function RuleIconService(ngDialog, CANVAS, RuleLabel, RuleConnection, AutoFlowCanvasStory) {
+    function RuleIconService(ngDialog, CANVAS, RuleLabel, RuleConnection, AutoFlowCanvasStory, VerticalInputPortLocator, VerticalOutputPortLocator) {
         var vm = this;
 
         vm.create = create;
@@ -36,8 +38,8 @@
             });
 
             vm.rule = new rule(CANVAS.icon.rule.attr);
-            vm.rule.createPort("input", new draw2d.layout.locator.VerticalInputPortLocator());
-            vm.rule.createPort("output", new draw2d.layout.locator.VerticalOutputPortLocator());
+            vm.rule.createPort("input", VerticalInputPortLocator.create());
+            vm.rule.createPort("output", VerticalOutputPortLocator.create());
             vm.rule.getOutputPorts().data[0].onConnect = onConnect;
             vm.rule.getOutputPorts().data[0].onMouseEnter = onOutputPortMouseEnter;
             vm.rule.installEditPolicy(new draw2d.policy.figure.SlimSelectionFeedbackPolicy());

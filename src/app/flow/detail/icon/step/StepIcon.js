@@ -18,10 +18,12 @@
         'StepLabel',
         'ActionMiniIcon',
         'EventConnection',
-        'AlertService'
+        'AlertService',
+        'VerticalInputPortLocator',
+        'VerticalOutputPortLocator'
     ];
     /* @ngInject */
-    function StepIconService($filter, $state, $injector, ngDialog, CANVAS, StepLabel, ActionMiniIcon, EventConnection, AlertService) {
+    function StepIconService($filter, $state, $injector, ngDialog, CANVAS, StepLabel, ActionMiniIcon, EventConnection, AlertService, VerticalInputPortLocator, VerticalOutputPortLocator) {
         var vm = this;
 
         vm.create = create;
@@ -45,8 +47,8 @@
             });
 
             vm.step = new step(CANVAS.icon.step.attr);
-            vm.step.createPort("input",new draw2d.layout.locator.VerticalInputPortLocator());
-            vm.step.createPort("output",new draw2d.layout.locator.VerticalOutputPortLocator());
+            vm.step.createPort("input",VerticalInputPortLocator.create());
+            vm.step.createPort("output",VerticalOutputPortLocator.create());
 
 
             addActionMiniIcon();

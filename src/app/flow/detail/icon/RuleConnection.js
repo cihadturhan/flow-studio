@@ -11,11 +11,12 @@
 
     RuleConnectionService.$inject = [
         '$injector',
-        'CANVAS'
+        'CANVAS',
+        'CustomFanRouter'
     ];
 
     /* @ngInject */
-    function RuleConnectionService($injector, CANVAS) {
+    function RuleConnectionService($injector, CANVAS, CustomFanRouter) {
         var vm = this;
 
         vm.create = create;
@@ -37,7 +38,7 @@
                 vm.connection.setTarget(extras.target);
                 vm.connection.setSource(extras.source);
             }
-            vm.connection.setRouter(new draw2d.layout.connection.CustomFanConnectionRouter());
+            vm.connection.setRouter(CustomFanRouter);
             vm.connection.setTargetDecorator(new draw2d.decoration.connection.ArrowDecorator(8, 8));
 
             if (attributes) {

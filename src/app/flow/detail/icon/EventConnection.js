@@ -23,7 +23,8 @@
         'AlertService',
         'RuleLocator',
         'RuleConnection',
-        'AutoFlowCanvasStory'
+        'AutoFlowCanvasStory',
+        'CustomFanRouter'
     ];
 
     /* @ngInject */
@@ -41,7 +42,8 @@
         AlertService,
         RuleLocator,
         RuleConnection,
-        AutoFlowCanvasStory) {
+        AutoFlowCanvasStory,
+        CustomFanRouter) {
 
         var vm = this;
         vm.create = create;
@@ -84,7 +86,7 @@
                 dialog.closePromise.then(onCloseEventDialog);
             }
 
-            vm.connection.setRouter(new draw2d.layout.connection.CustomFanConnectionRouter());
+            vm.connection.setRouter(CustomFanRouter.create());
             vm.connection.setTargetDecorator(new draw2d.decoration.connection.ArrowDecorator(5, 8));
             return vm.connection;
 
