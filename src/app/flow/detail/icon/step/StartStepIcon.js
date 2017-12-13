@@ -26,7 +26,7 @@
         function create(x, y, attributes){
             vm.canvas = $injector.get('AutoFlowCanvasDraw').canvas;
 
-            var startStep = draw2d.shape.node.Between.extend({
+            var startStep = draw2d.shape.basic.Rectangle.extend({
                 NAME: CANVAS.icon.start_step.config.name,
                 onMouseEnter: onMouseEnter,
                 onMouseLeave: onMouseLeave,
@@ -35,6 +35,8 @@
             });
 
             vm.startStep = new startStep(CANVAS.icon.start_step.attr);
+            vm.startStep.createPort("input", new draw2d.layout.locator.VerticalInputPortLocator());
+            vm.startStep.createPort("output", new draw2d.layout.locator.VerticalOutputPortLocator());
 
 
             if (attributes) {
@@ -55,8 +57,8 @@
             vm.startStep.getOutputPorts().data[0].onMouseEnter = onOutputPortMouseEnter;
             vm.startStep.installEditPolicy(new draw2d.policy.figure.GlowSelectionFeedbackPolicy());
             vm.canvas.getCommandStack().execute(new draw2d.command.CommandAdd(vm.canvas, vm.startStep, x, y));
-            vm.startStep.getOutputPorts().data[0].setConnectionAnchor(new draw2d.layout.anchor.ChopboxConnectionAnchor(vm.startStep.getOutputPorts().data[0]));
-            vm.startStep.getInputPorts().data[0].setConnectionAnchor(new draw2d.layout.anchor.ChopboxConnectionAnchor(vm.startStep.getInputPorts().data[0]));
+            /*vm.startStep.getOutputPorts().data[0].setConnectionAnchor(new draw2d.layout.anchor.ChopboxConnectionAnchor(vm.startStep.getOutputPorts().data[0]));
+            vm.startStep.getInputPorts().data[0].setConnectionAnchor(new draw2d.layout.anchor.ChopboxConnectionAnchor(vm.startStep.getInputPorts().data[0]));*/
 
             return vm.startStep;
 

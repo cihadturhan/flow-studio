@@ -14,7 +14,7 @@
         'CANVAS',
         'RuleLabel',
         'RuleConnection',
-        'AutoFlowCanvasStory'
+        'AutoFlowCanvasStory',
     ];
 
     /* @ngInject */
@@ -32,12 +32,12 @@
                 NAME: CANVAS.icon.rule.config.name,
                 getPersistentAttributes: getPersistentAttributes,
                 setPersistentAttributes: setPersistentAttributes,
-                createSet: createSet
+                createSet: createSet,
             });
 
             vm.rule = new rule(CANVAS.icon.rule.attr);
-            createPort('input');
-            createPort('output');
+            vm.rule.createPort("input", new draw2d.layout.locator.VerticalInputPortLocator());
+            vm.rule.createPort("output", new draw2d.layout.locator.VerticalOutputPortLocator());
             vm.rule.getOutputPorts().data[0].onConnect = onConnect;
             vm.rule.getOutputPorts().data[0].onMouseEnter = onOutputPortMouseEnter;
             vm.rule.installEditPolicy(new draw2d.policy.figure.SlimSelectionFeedbackPolicy());
@@ -47,8 +47,8 @@
                 vm.rule.setPersistentAttributes(attributes);
             }
 
-            vm.rule.getOutputPorts().data[0].setConnectionAnchor(new draw2d.layout.anchor.ChopboxConnectionAnchor(vm.rule.getOutputPorts().data[0]));
-            vm.rule.getInputPorts().data[0].setConnectionAnchor(new draw2d.layout.anchor.ChopboxConnectionAnchor(vm.rule.getInputPorts().data[0]));
+            //vm.rule.getOutputPorts().data[0].setConnectionAnchor(new draw2d.layout.anchor.ChopboxConnectionAnchor(vm.rule.getOutputPorts().data[0]));
+            //vm.rule.getInputPorts().data[0].setConnectionAnchor(new draw2d.layout.anchor.ChopboxConnectionAnchor(vm.rule.getInputPorts().data[0]));
 
             return vm.rule;
 
@@ -57,20 +57,6 @@
             function createSet() {
                 var x = ((this.width - 40) / 2);
                 return vm.rule.canvas.paper.image(CANVAS.icon.rule.config.image, x, 16, 40, 40);
-            }
-
-            function createPort(locator) {
-                var locatorObject;
-                switch (locator) {
-                    case 'input':
-                        locatorObject = new draw2d.layout.locator.InputPortLocator();
-                        break;
-                    case 'output':
-                        locatorObject = new draw2d.layout.locator.OutputPortLocator();
-                        break;
-                }
-                var port = vm.rule.createPort(locator, locatorObject);
-                //port.setConnectionAnchor(new draw2d.layout.anchor.ChopboxConnectionAnchor(port));
             }
 
             function getPersistentAttributes() {
@@ -129,7 +115,7 @@
                     actions: [],
                     eventName: eventName,
                     sourceStep: sourceStep,
-                    targetStep: targetStep
+                    targetStep: targetStep,
                 };
                 AutoFlowCanvasStory.story.storyTemplate.storyDefinition.connections.push(storyConnection);
             }
@@ -161,8 +147,8 @@
                     },
                     ruleIndex: function indexFactory() {
                         return 0;
-                    }
-                }
+                    },
+                },
             });
             dialog.closePromise.then(onCloseRuleIconDialog);
 
@@ -216,7 +202,7 @@
             this.canvas.installEditPolicy(new draw2d.policy.connection.DragConnectionCreatePolicy({
                 createConnection: function () {
                     return RuleConnection.create(null, null);
-                }
+                },
             }));
         }
 

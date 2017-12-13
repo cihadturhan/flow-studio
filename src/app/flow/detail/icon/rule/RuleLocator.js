@@ -40,8 +40,8 @@
                 //var points = conn.getVertices();
 
                 var totalLength = conn.shape.node.getTotalLength();
-                var p1 = conn.shape.node.getPointAtLength(0.8 * totalLength);
-                var p2 = conn.shape.node.getPointAtLength(0.9 * totalLength);
+                var p1 = conn.shape.node.getPointAtLength(0.8 * totalLength - 20);
+                var p2 = conn.shape.node.getPointAtLength(0.9 * totalLength - 20);
 
                 /*var segmentIndex = Math.floor((points.getSize() - 2) / 2.5);
                 if (points.getSize() <= segmentIndex + 1) {

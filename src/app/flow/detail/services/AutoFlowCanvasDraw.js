@@ -88,8 +88,13 @@
             (CANVAS.canvas.isReadonly) && vm.canvas.installEditPolicy(new draw2d.policy.canvas.ReadOnlySelectionPolicy());
             (CANVAS.canvas.hasCoronaDecoration) && vm.canvas.installEditPolicy(new draw2d.policy.canvas.CoronaDecorationPolicy());
 
-            var startStep = StartStepIcon.create(60, 60);
+            var startStep = StartStepIcon.create(vm.canvas.html.parent().width()/2, 60);
             vm.canvas.add(startStep);
+
+            vm.canvas.on("connect", function(emitter, event){
+                event.connection.toBack();
+            });
+
             // vm.canvas.on("figure:add", function(emitter, event){
             //     console.log("Figure added");
             // });

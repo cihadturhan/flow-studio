@@ -37,8 +37,9 @@
                 vm.connection.setTarget(extras.target);
                 vm.connection.setSource(extras.source);
             }
-            vm.connection.setRouter(new draw2d.layout.connection.DirectRouter());
-            vm.connection.setTargetDecorator(new draw2d.decoration.connection.ArrowDecorator(17, 8));
+            vm.connection.setRouter(new draw2d.layout.connection.CustomFanConnectionRouter());
+            vm.connection.setTargetDecorator(new draw2d.decoration.connection.ArrowDecorator(8, 8));
+
             if (attributes) {
                 vm.connection.setPersistentAttributes(attributes);
                 angular.forEach(vm.connection.getSource().getParent().getConnections().data, onIterateConnection);

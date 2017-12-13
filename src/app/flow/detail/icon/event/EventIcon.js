@@ -31,7 +31,31 @@
                 setPersistentAttributes: setPersistentAttributes
             });
 
+            //
+            var MyInputPortLocator = draw2d.layout.locator.PortLocator.extend({
+                init:function( ){
+                    this._super();
+                },
+                relocate:function(index, figure){
+                    this.applyConsiderRotation(figure, figure.getParent().getWidth()/2, 0);
+                }
+            });
+
+
+            var MyOutputPortLocator = draw2d.layout.locator.PortLocator.extend({
+                init:function( ){
+                    this._super();
+                },
+                relocate:function(index, figure){
+                    var p = figure.getParent();
+
+                    this.applyConsiderRotation(figure, p.getWidth()/2, p.getHeight());
+                }
+            });
+
             vm.event = new event(CANVAS.icon.event.attr);
+            vm.event.createPort('input', MyInputPortLocator());
+            vm.event.createPort('output', MyOutputPortLocator());
 
             if(attributes){
                 vm.event.setPersistentAttributes(attributes);

@@ -85,7 +85,7 @@
             }
 
             vm.connection.setRouter(new draw2d.layout.connection.CustomFanConnectionRouter());
-            vm.connection.setTargetDecorator(new draw2d.decoration.connection.ArrowDecorator(17, 8));
+            vm.connection.setTargetDecorator(new draw2d.decoration.connection.ArrowDecorator(5, 8));
             return vm.connection;
 
             //////////////////////

@@ -176,8 +176,8 @@
                     },
                     event: {
                         attr: {
-                            width: 70,
-                            height: 70,
+                            width: 120,
+                            height: 60,
                             radius: 0,
                             cssClass: "autoflow_canvas_icon_event"
                         },
@@ -229,8 +229,8 @@
                     },
                     step: {
                         attr: {
-                            width: 100,
-                            height: 70,
+                            width: 120,
+                            height: 60,
                             radius: 20,
                             cssClass: "autoflow_canvas_icon_step"
                         },

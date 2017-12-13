@@ -1,49 +1,24 @@
-draw2d.layout.connection.CustomFanConnectionRouter = draw2d.layout.connection.DirectRouter.extend({
+draw2d.layout.connection.CustomFanConnectionRouter = draw2d.layout.connection.CollisionAvoidingManhattanConnectionRouter.extend({
     NAME: "draw2d.layout.connection.CustomFanConnectionRouter",
 
-    /**
-     * @constructor Creates a new Router object.
-     */
     init: function () {
         this._super();
 
         this.spline = new draw2d.util.spline.CubicSpline();
 //        this.spline = new draw2d.util.spline.BezierSpline();
 
-        this.MINDIST = 50;
         this.cheapRouter = null;
+        this.SEPARATION = 100;
+        this.EPSILON = 5;
     },
 
-
-    /**
-     * @method
-     * Callback method if the router has been assigned to a connection.
-     *
-     * @param {draw2d.Connection} connection The assigned connection
-     * @template
-     * @since 2.7.2
-     */
     onInstall: function (connection) {
         connection.installEditPolicy(new draw2d.policy.line.LineSelectionFeedbackPolicy());
-
     },
 
-    /**
-     * @method
-     * Layout the hands over connection in a manhattan like layout
-     *
-     * @param {draw2d.Connection}  conn
-     * @param {draw2d.util.ArrayList} oldVertices old/existing vertices of the Connection
-     * @param {Object} routingHints some helper attributes for the router
-     * @param {Boolean} routingHints.startMoved is true if just the start location has moved
-     * @param {Boolean} routingHints.destMoved is true if the destination location has changed
-     */
     route: function (conn, routingHints) {
         var source = conn.getSource().getParent(), target = conn.getTarget().getParent();
-        //Self connection
-        if (source === target) {
-            return this.selfRoute(conn, routingHints);
-        }
+
         var position = target.getPosition().getPosition(source.getPosition());
         var isConnectionNormal = position === draw2d.geo.PositionConstants.SOUTH || position === draw2d.geo.PositionConstants.EAST;
         var lines;
@@ -55,25 +30,32 @@ draw2d.layout.connection.CustomFanConnectionRouter = draw2d.layout.connection.Di
             lines.addAll(source.getConnections().clone(), true);
         }
 
-
         lines.grep(function (other) {
             return other.getSource().getParent() === source && other.getTarget().getParent() === target ||
                 other.getTarget().getParent() === source && other.getSource().getParent() === target;
         });
 
-        if (lines.getSize() > 1) {
-            this.routeCollision(conn, lines.indexOf(conn));
+        //Self connection
+        if (source === target) {
+            //this._super(conn, routingHints, lines.indexOf(conn));
+            //return this._super(conn, routingHints);
+            return this.selfRouteCollision(conn, lines.indexOf(conn), lines.getSize());
         }
-        else {
+
+        if (lines.getSize() > 1) {
+
+            //this._super(conn, routingHints, lines.indexOf(conn));
+            this.routeCollision(conn, lines.indexOf(conn), lines.getSize());
+        } else {
             this._super(conn, routingHints);
         }
     },
 
-    selfRoute: function (conn, routingHints) {
+    oldSelfRoute: function (conn, routingHints) {
         var start = new draw2d.geo.Point(conn.getStartX(), conn.getStartY());
         var end = new draw2d.geo.Point(conn.getEndX(), conn.getEndY());
 
-        var separation = 90;
+        var separation = 140;
 
         var position = end.getPosition(start);
         var isPositionNormal = position === draw2d.geo.PositionConstants.SOUTH || position === draw2d.geo.PositionConstants.EAST;
@@ -91,7 +73,7 @@ draw2d.layout.connection.CustomFanConnectionRouter = draw2d.layout.connection.Di
 
         var bendPoint1, bendPoint2;
 
-        bendPoint1 = new draw2d.geo.Point(start.x + (-1 * (ySeparation + xSeparation*0.5)), start.y + xSeparation);
+        bendPoint1 = new draw2d.geo.Point(start.x + (-1 * (ySeparation + xSeparation * 0.5)), start.y + xSeparation);
         bendPoint2 = new draw2d.geo.Point(end.x + (-1 * (ySeparation - xSeparation * 0.5)), end.y + xSeparation);
 
 
@@ -124,60 +106,77 @@ draw2d.layout.connection.CustomFanConnectionRouter = draw2d.layout.connection.Di
         }
         conn.svgPathString = path.join("");
     },
+    selfRouteCollision: function(conn, index, length){
+        var start = new draw2d.geo.Point(conn.getStartX(), conn.getStartY());
+        var end = new draw2d.geo.Point(conn.getEndX(), conn.getEndY());
 
-    /**
-     * @method
-     * route the connection if connections overlap. Two connections overlap if the combination
-     * of source and target anchors are equal.
-     *
-     * @param {draw2d.Connection} conn
-     * @param {Number} index
-     */
-    routeCollision: function (conn, index) {
-        index = index + 1;
-        var start = conn.getStartPoint();
-        var end = conn.getEndPoint();
-
-        var separation = 90;
-
-        var querterPoint = new draw2d.geo.Point((end.x + 3 * start.x) / 4, (end.y + 3 * start.y) / 4);
-        var thirdQuerterPoint = new draw2d.geo.Point((3 * end.x + start.x) / 4, (3 * end.y + start.y) / 4);
-        var position = end.getPosition(start);
-        var isPositionNormal = position === draw2d.geo.PositionConstants.SOUTH || position === draw2d.geo.PositionConstants.EAST;
-        var ray;
-        if (isPositionNormal) {
-            ray = new draw2d.geo.Point(end.x - start.x, end.y - start.y);
-        } else {
-            ray = new draw2d.geo.Point(start.x - end.x, start.y - end.y);
-        }
-
-        var length = Math.sqrt(ray.x * ray.x + ray.y * ray.y);
-
-        var xSeparation = separation * ray.x / length;
-        var ySeparation = separation * ray.y / length;
-
-        var bendPoint1, bendPoint2;
+        var startElbow0, endElbow0, endElbow1, endElbow2, startElbow1, startElbow2, multipier;
+        var maxMultiplier = length % 2 === 0 ? length / 2 + 1 : (length + 1) / 2 + 1;
 
         if (index % 2 === 0) {
-            if (index !== 0) {
-                index = index - 1;
-            }
-            bendPoint1 = new draw2d.geo.Point(querterPoint.x + (index / 2) * (-1 * ySeparation), querterPoint.y + (index / 2) * xSeparation);
-            bendPoint2 = new draw2d.geo.Point(thirdQuerterPoint.x + (index / 2) * (-1 * ySeparation), thirdQuerterPoint.y + (index / 2) * xSeparation);
+            multipier = (index / 2) + 1;
+        } else {
+            multipier = -(index + 1) / 2;
         }
-        else {
-            bendPoint1 = new draw2d.geo.Point(querterPoint.x + (index / 2) * ySeparation, querterPoint.y + (index / 2) * (-1 * xSeparation));
-            bendPoint2 = new draw2d.geo.Point(thirdQuerterPoint.x + (index / 2) * ySeparation, thirdQuerterPoint.y + (index / 2) * (-1 * xSeparation));
-        }
+        var SEPARATION = this.SEPARATION * multipier * 3/2;
+        var EPS_X = (multipier > 0 ? 1 : -1) * (maxMultiplier - Math.abs(multipier)) * this.EPSILON;
+        var EPS_Y = Math.abs(multipier)* this.EPSILON * 2;
 
-        conn.addPoint(start);
-        conn.addPoint(bendPoint1);
-        conn.addPoint(bendPoint2);
-        conn.addPoint(end);
+        var x = multipier > 0 ? Math.max(start.x, end.x) + SEPARATION : Math.min(start.x, end.x) + SEPARATION;
+
+        startElbow0 = new draw2d.geo.Point(start.x + EPS_X, start.y);
+        startElbow1 = new draw2d.geo.Point(start.x + EPS_X, start.y + EPS_Y);
+        startElbow2 = new draw2d.geo.Point(x, start.y + EPS_Y);
+        endElbow2 = new draw2d.geo.Point(x, end.y - EPS_Y);
+        endElbow1 = new draw2d.geo.Point(end.x + EPS_X, end.y - EPS_Y);
+        endElbow0 = new draw2d.geo.Point(end.x + EPS_X, end.y);
+
+        conn.addPoint(startElbow0);
+        conn.addPoint(startElbow1);
+        conn.addPoint(startElbow2);
+        conn.addPoint(endElbow2);
+        conn.addPoint(endElbow1);
+        conn.addPoint(endElbow0);
 
         // calculate the path string for the SVG rendering
         //
         this._paint(conn);
     },
+    routeCollision: function (conn, index, length) {
+        var start = conn.getStartPoint();
+        var end = conn.getEndPoint();
 
+        var startElbow0, endElbow0, endElbow1, endElbow2, startElbow1, startElbow2, multipier;
+        var maxMultiplier = length % 2 === 0 ? length / 2 + 1 : (length + 1) / 2 + 1;
+
+
+        if (index % 2 === 0) {
+            multipier = (index / 2) + 1;
+        } else {
+            multipier = -(index + 1) / 2;
+        }
+        var SEPARATION = this.SEPARATION * multipier;
+        var EPS_X = this.EPSILON * multipier;
+        var EPS_Y = (maxMultiplier - Math.abs(multipier))* this.EPSILON * 2;
+
+        var x = multipier > 0 ? Math.max(start.x, end.x) + SEPARATION : Math.min(start.x, end.x) + SEPARATION;
+
+        startElbow0 = new draw2d.geo.Point(start.x + EPS_X, start.y);
+        startElbow1 = new draw2d.geo.Point(start.x + EPS_X, start.y + EPS_Y);
+        startElbow2 = new draw2d.geo.Point(x, start.y + EPS_Y);
+        endElbow2 = new draw2d.geo.Point(x, end.y - EPS_Y);
+        endElbow1 = new draw2d.geo.Point(end.x + EPS_X, end.y - EPS_Y);
+        endElbow0 = new draw2d.geo.Point(end.x + EPS_X, end.y);
+
+        conn.addPoint(startElbow0);
+        conn.addPoint(startElbow1);
+        conn.addPoint(startElbow2);
+        conn.addPoint(endElbow2);
+        conn.addPoint(endElbow1);
+        conn.addPoint(endElbow0);
+
+        // calculate the path string for the SVG rendering
+        //
+        this._paint(conn);
+    },
 });
